@@ -21,6 +21,10 @@ export const siteConfig = {
       href: '/blog',
     },
     {
+      label: 'Posts',
+      href: '/posts',
+    },
+    {
       label: 'About',
       href: '/about',
     },
