@@ -21,8 +21,6 @@ export default function NavbarDropdown() {
   const pathname = usePathname()
   const { user: currentUser, setIsLoading: userLoading } = useUser()
 
-  console.log(currentUser)
-
   const handleLogout = () => {
     logout()
     userLoading(true)
