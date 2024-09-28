@@ -1,5 +1,5 @@
 'use client'
-
+import { Suspense } from 'react'
 import { Button } from '@nextui-org/button'
 import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -42,37 +42,40 @@ const LoginPage = () => {
 
   return (
     <>
-      {isPending && <Loading />}
-      <div className='flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center'>
-        <h3 className='my-2 text-xl font-bold'>Digital DIY Depot </h3>
-        <p className='mb-4'>Welcome Back! Let&lsquo;s Get Started</p>
-        <div className='w-[35%]'>
-          <FormController
-            resolver={zodResolver(loginValidationSchema)}
-            onSubmit={onSubmit}
-          >
-            <div className='py-3'>
-              <FormInput label='Email' name='email' type='email' />
-            </div>
-            <div className='py-3'>
-              <FormInput label='Password' name='password' type='password' />
-            </div>
-
-            <Button
-              className='w-full my-3 font-semibold rounded-md bg-default-900 text-default'
-              size='lg'
-              type='submit'
+      <Suspense fallback={<Loading />}>
+        {isPending && <Loading />}
+        <div className='flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center'>
+          <h3 className='my-2 text-xl font-bold'>Digital DIY Depot </h3>
+          <p className='mb-4'>Welcome Back! Let&lsquo;s Get Started</p>
+          <div className='w-[35%]'>
+            <FormController
+              resolver={zodResolver(loginValidationSchema)}
+              onSubmit={onSubmit}
             >
-              Login
-            </Button>
-          </FormController>
-          <GoogleLoginButton />
-          <GithubLoginButton />
-          <div className='text-center'>
-            Don&lsquo;t have account ? <Link href={'/register'}>Register</Link>
+              <div className='py-3'>
+                <FormInput label='Email' name='email' type='email' />
+              </div>
+              <div className='py-3'>
+                <FormInput label='Password' name='password' type='password' />
+              </div>
+
+              <Button
+                className='w-full my-3 font-semibold rounded-md bg-default-900 text-default'
+                size='lg'
+                type='submit'
+              >
+                Login
+              </Button>
+            </FormController>
+            <GoogleLoginButton />
+            <GithubLoginButton />
+            <div className='text-center'>
+              Don&lsquo;t have account ?{' '}
+              <Link href={'/register'}>Register</Link>
+            </div>
           </div>
         </div>
-      </div>
+      </Suspense>
     </>
   )
 }
