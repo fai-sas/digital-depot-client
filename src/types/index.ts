@@ -45,15 +45,29 @@ export interface IInput {
   disabled?: boolean
 }
 
+export interface TPost {
+  totalVotes: number
+  upvote: number
+  downvote: number
+  isDeleted: boolean
+  _id: string
+  title: string
+  description: string
+  images: string[]
+  category: string
+  isPremium: boolean
+  postedBy: string
+  createdAt: string
+  updatedAt: string
+  __v: number
+}
+
 export interface ISearchResult {
   title: string
   description: string
   thumbnail: string
   id: string
 }
-
-
-
 
 export interface ISearchResult {
   title: string

@@ -1,8 +1,14 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { FieldValues } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-import { createPost, getAllPosts, getSinglePost } from '../services/Post'
+import {
+  createPost,
+  downVote,
+  getAllPosts,
+  getSinglePost,
+  upVote,
+} from '../services/Post'
 
 export const useCreatePost = () => {
   return useMutation<any, Error, FieldValues>({
@@ -28,5 +34,36 @@ export const useSingleAllPost = (postId: string) => {
   return useQuery({
     queryKey: ['SINGLE_POST', postId],
     queryFn: async () => await getSinglePost(postId),
+  })
+}
+
+export const useUpVote = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['UPVOTE'],
+    mutationFn: async (postId: string) => await upVote(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_POSTS'] })
+      toast.success('Post Up Voted Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
+  })
+}
+export const useDownVote = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['DOWNVOTE'],
+    mutationFn: async (postId: string) => await downVote(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_POSTS'] })
+      toast.success('Post Down Voted Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
   })
 }

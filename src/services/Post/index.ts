@@ -35,3 +35,23 @@ export const getSinglePost = async (postId: string) => {
     throw new Error('Failed to fetch data')
   }
 }
+
+export const upVote = async (postId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.put(`/posts/upvote/${postId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error while up voting')
+  }
+}
+
+export const downVote = async (postId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.put(`/posts/downvote/${postId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error while up voting')
+  }
+}

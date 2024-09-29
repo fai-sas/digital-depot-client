@@ -1,5 +1,6 @@
-import { getSinglePost } from '@/src/services/Post'
 import SinglePost from '../_components/SinglePost'
+
+import { getSinglePost } from '@/src/services/Post'
 
 interface IProps {
   params: {

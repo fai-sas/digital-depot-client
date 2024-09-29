@@ -3,13 +3,9 @@
 import Image from 'next/image'
 import DOMPurify from 'dompurify'
 import { User } from '@nextui-org/user'
-
-import { useUser } from '@/src/context/user.provider'
-
 import moment from 'moment'
 
 const SinglePost = ({ post }) => {
-  const { user: currentUser } = useUser()
   const { title, description, images, category, rating, comments, createdAt } =
     post || {}
 
@@ -19,18 +15,18 @@ const SinglePost = ({ post }) => {
     <>
       <User
         avatarProps={{
-          src: `${currentUser?.profilePhoto}`,
+          src: `${post?.postedBy?.profilePhoto}`,
         }}
         isFocusable={true}
-        name={currentUser?.name}
+        name={post?.postedBy?.name}
       />
       <p>Published on {moment(createdAt).format('D MMMM  YYYY')}</p>
       <div className='pb-4 border-b border-default-200'>
         <Image
           alt='Card background'
           className='object-cover rounded-xl'
-          src={images[0]}
           height={500}
+          src={images[0]}
           width={1000}
         />
         <p className='py-4'>{category}</p>

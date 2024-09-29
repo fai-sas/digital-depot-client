@@ -7,14 +7,13 @@ import {
   DropdownTrigger,
 } from '@nextui-org/dropdown'
 import { usePathname, useRouter } from 'next/navigation'
-import { Avatar } from '@nextui-org/avatar'
+import { User } from '@nextui-org/react'
 
-import { User, Link } from '@nextui-org/react'
-
-import { useUser } from '@/src/context/user.provider'
 
 import { logout } from '../services/Auth'
 import { protectedRoutes } from '../utils/protectedRoutes'
+
+import { useUser } from '@/src/context/user.provider'
 
 export default function NavbarDropdown() {
   const router = useRouter()
