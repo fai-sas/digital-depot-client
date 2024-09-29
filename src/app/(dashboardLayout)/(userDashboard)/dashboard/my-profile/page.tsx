@@ -6,15 +6,12 @@ import {
   CardBody,
   CardFooter,
   Divider,
-  Link,
   Image,
-  Tooltip,
 } from '@nextui-org/react'
 
-import { EditIcon } from 'lucide-react'
+import UpdateProfile from './_components/UpdateProfile'
 
 import { useGetMyProfile } from '@/src/hooks/user.hook'
-import UpdateProfile from './_components/UpdateProfile'
 
 const MyProfilePage = () => {
   const { data: userProfile, isLoading } = useGetMyProfile()

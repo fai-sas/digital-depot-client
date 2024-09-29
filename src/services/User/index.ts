@@ -1,7 +1,6 @@
 'use server'
 
 import axiosInstance from '@/src/lib/AxiosInstance'
-import { FieldValues } from 'react-hook-form'
 
 export const getAllUsers = async () => {
   try {

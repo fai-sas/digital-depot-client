@@ -2,7 +2,6 @@ import {
   Navbar as NextUINavbar,
   NavbarContent,
   NavbarMenu,
-  NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
@@ -19,9 +18,6 @@ import NavbarDropdown from './NavbarDropdown'
 import { siteConfig } from '@/src/config/site'
 import { ThemeSwitch } from '@/src/components/theme-switch'
 import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
   SearchIcon,
   Logo,
 } from '@/src/components/icons'

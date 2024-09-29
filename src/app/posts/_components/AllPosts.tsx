@@ -1,9 +1,10 @@
 'use client'
 
 import PostCard from './PostCard'
+import CardSkeleton from './CardSkeleton'
+
 import { TPost } from '@/src/types'
 import { useGetAllPosts } from '@/src/hooks/post.hook'
-import CardSkeleton from './CardSkeleton'
 
 const AllPosts = () => {
   const { data, isLoading } = useGetAllPosts()

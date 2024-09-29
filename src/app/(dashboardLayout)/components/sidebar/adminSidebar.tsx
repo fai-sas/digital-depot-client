@@ -1,11 +1,9 @@
-import { Avatar, Tooltip } from '@nextui-org/react'
 import { FolderPen, Cog, Home, User, CircleDollarSign } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { useSidebarContext } from '../../layout/layout-context'
 
-import { CollapseItems } from './collapse-items'
 import { SidebarItem } from './sidebar-item'
 import { SidebarMenu } from './sidebar-menu'
 import { Sidebar } from './sidebar.styles'

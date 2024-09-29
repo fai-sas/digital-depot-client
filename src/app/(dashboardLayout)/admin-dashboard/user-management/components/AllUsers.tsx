@@ -14,6 +14,7 @@ import {
   ChipProps,
 } from '@nextui-org/react'
 import { DeleteIcon, EditIcon, EyeIcon } from 'lucide-react'
+
 import { useGetAllUsers } from '@/src/hooks/user.hook'
 
 const columns = [

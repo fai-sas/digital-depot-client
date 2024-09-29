@@ -10,6 +10,7 @@ import { Button } from '@nextui-org/button'
 import { Divider } from '@nextui-org/divider'
 import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+
 import { useGetSinglePost, useUpdatePost } from '@/src/hooks/post.hook'
 import FormInput from '@/src/components/form/FormInput'
 import FormSelect from '@/src/components/form/FormSelect'
@@ -18,6 +19,7 @@ import { useUser } from '@/src/context/user.provider'
 
 // Dynamically import ReactQuill to handle SSR
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+
 import 'react-quill/dist/quill.snow.css'
 
 export default function EditPost({ postId }: { postId: string }) {

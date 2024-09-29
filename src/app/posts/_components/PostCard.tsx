@@ -9,12 +9,10 @@ import {
   Button,
   CardFooter,
 } from '@nextui-org/react'
-
 import { ArrowDown, ArrowUp } from 'lucide-react'
-
-import { useUser } from '@/src/context/user.provider'
-import { useDownVote, useUpVote } from '@/src/hooks/post.hook'
 import Link from 'next/link'
+
+import { useDownVote, useUpVote } from '@/src/hooks/post.hook'
 import { TPost } from '@/src/types'
 
 export default function PostCard({ post }: TPost) {

@@ -10,13 +10,13 @@ export default function Hero() {
       {/* Background Image */}
       <div className='absolute inset-0 z-0'>
         <Image
-          src='https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          priority
           alt='Hero Background'
+          className='rounded-md opacity-50'
           layout='fill'
           objectFit='cover'
           objectPosition='center'
-          priority
-          className='rounded-md opacity-50'
+          src='https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         />
       </div>
 
@@ -30,7 +30,7 @@ export default function Hero() {
           programming, and more.
         </p>
         <Link href='/posts'>
-          <Button color='primary' size='lg' className='px-8'>
+          <Button className='px-8' color='primary' size='lg'>
             Get Started
           </Button>
         </Link>

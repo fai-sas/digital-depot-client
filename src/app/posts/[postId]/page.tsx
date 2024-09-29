@@ -1,6 +1,7 @@
 'use client'
 
 import SinglePost from '../_components/SinglePost'
+
 import { useGetSinglePost } from '@/src/hooks/post.hook'
 
 interface IProps {

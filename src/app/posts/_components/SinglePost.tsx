@@ -4,12 +4,8 @@ import Image from 'next/image'
 import DOMPurify from 'dompurify'
 import { User } from '@nextui-org/user'
 import moment from 'moment'
-import CommentBox from './CommentBox'
 import { Divider } from '@nextui-org/divider'
-import Comments from './Comments'
 import { Button } from '@nextui-org/button'
-import { useUser } from '@/src/context/user.provider'
-import { useFollowUser, useUnFollowUser } from '@/src/hooks/user.hook'
 import html2pdf from 'html2pdf.js'
 import { useRef } from 'react'
 
@@ -24,6 +20,12 @@ import {
   LinkedinIcon,
   WhatsappIcon,
 } from 'react-share'
+
+import Comments from './Comments'
+import CommentBox from './CommentBox'
+
+import { useFollowUser, useUnFollowUser } from '@/src/hooks/user.hook'
+import { useUser } from '@/src/context/user.provider'
 
 const SinglePost = ({ post }: any) => {
   const {
@@ -69,6 +71,7 @@ const SinglePost = ({ post }: any) => {
 
   const handleDownloadPDF = () => {
     const element = postRef.current
+
     if (element) {
       // Log the inner HTML of the element being captured
       console.log(element.innerHTML)
@@ -117,8 +120,8 @@ const SinglePost = ({ post }: any) => {
           </Button>
         ) : (
           <Button
-            variant='bordered'
             disabled={UnFollowUserPending}
+            variant='bordered'
             onClick={handleUnFollow}
           >
             Unfollow User
@@ -161,20 +164,20 @@ const SinglePost = ({ post }: any) => {
         {/* Social Media Share Buttons with Icons */}
         <div className='flex mt-4 space-x-4'>
           <FacebookShareButton url={shareUrl}>
-            <FacebookIcon size={32} round />
+            <FacebookIcon round size={32} />
           </FacebookShareButton>
-          <TwitterShareButton url={shareUrl} title={title}>
-            <TwitterIcon size={32} round />
+          <TwitterShareButton title={title} url={shareUrl}>
+            <TwitterIcon round size={32} />
           </TwitterShareButton>
           <LinkedinShareButton
-            url={shareUrl}
-            title={title}
             summary={sanitizedDescription}
+            title={title}
+            url={shareUrl}
           >
-            <LinkedinIcon size={32} round />
+            <LinkedinIcon round size={32} />
           </LinkedinShareButton>
-          <WhatsappShareButton url={shareUrl} title={title}>
-            <WhatsappIcon size={32} round />
+          <WhatsappShareButton title={title} url={shareUrl}>
+            <WhatsappIcon round size={32} />
           </WhatsappShareButton>
         </div>
       </article>

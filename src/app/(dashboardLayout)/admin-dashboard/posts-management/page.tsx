@@ -7,9 +7,9 @@ import CreatePostModal from '@/src/components/modals/CreatePostModal'
 const PostManagementPage = () => {
   return (
     <>
-      <Button>
-        <CreatePostModal />
-      </Button>
+      {/* <Button> */}
+      <CreatePostModal />
+      {/* </Button> */}
       <PostTable />
     </>
   )

@@ -22,12 +22,12 @@ export default function ContactPage() {
           <div className='flex flex-col items-center justify-center gap-8 md:flex-row'>
             <div className='text-center md:w-1/3'>
               <Image
-                src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                alt='Support'
-                width={300}
-                height={200}
-                className='rounded-lg'
                 priority
+                alt='Support'
+                className='rounded-lg'
+                height={200}
+                src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                width={300}
               />
               <h3 className='mt-4 text-xl font-semibold'>Technical Support</h3>
               <p className='mt-2 text-lg'>
@@ -36,9 +36,9 @@ export default function ContactPage() {
               </p>
               <Button
                 as='a'
-                href='mailto:support@techinsights.com'
-                color='success'
                 className='mt-4'
+                color='success'
+                href='mailto:support@techinsights.com'
               >
                 Email Support
               </Button>
@@ -46,18 +46,18 @@ export default function ContactPage() {
 
             <div className='text-center md:w-1/3'>
               <Image
-                src='https://images.unsplash.com/photo-1457433575995-8407028a9970?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                alt='FAQ'
-                width={300}
-                height={200}
-                className='rounded-lg'
                 priority
+                alt='FAQ'
+                className='rounded-lg'
+                height={200}
+                src='https://images.unsplash.com/photo-1457433575995-8407028a9970?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                width={300}
               />
               <h3 className='mt-4 text-xl font-semibold'>FAQs</h3>
               <p className='mt-2 text-lg'>
                 Find answers to common questions in our FAQ section.
               </p>
-              <Button color='primary' className='mt-4'>
+              <Button className='mt-4' color='primary'>
                 View FAQs
               </Button>
             </div>
@@ -74,12 +74,12 @@ export default function ContactPage() {
           <div className='flex flex-col items-center justify-center gap-8 md:flex-row'>
             <div className='text-center md:w-1/2'>
               <Image
-                src='https://plus.unsplash.com/premium_photo-1681400699241-834781696dc6?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                alt='Office Location'
-                width={400}
-                height={300}
-                className='rounded-lg'
                 priority
+                alt='Office Location'
+                className='rounded-lg'
+                height={300}
+                src='https://plus.unsplash.com/premium_photo-1681400699241-834781696dc6?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                width={400}
               />
             </div>
             <div className='text-lg leading-relaxed md:w-1/2'>
@@ -111,31 +111,31 @@ export default function ContactPage() {
               <form className='space-y-6'>
                 <div className='flex flex-col gap-4 md:flex-row'>
                   <Input
-                    fullWidth
-                    clearable
                     bordered
-                    labelPlaceholder='Your Name'
+                    clearable
+                    fullWidth
                     required
                     className='w-full md:w-1/2'
+                    labelPlaceholder='Your Name'
                   />
                   <Input
-                    fullWidth
-                    clearable
                     bordered
-                    labelPlaceholder='Your Email'
-                    type='email'
+                    clearable
+                    fullWidth
                     required
                     className='w-full md:w-1/2'
+                    labelPlaceholder='Your Email'
+                    type='email'
                   />
                 </div>
                 <Textarea
-                  fullWidth
                   bordered
-                  labelPlaceholder='Your Message'
+                  fullWidth
                   required
+                  labelPlaceholder='Your Message'
                   rows={6}
                 />
-                <Button type='submit' color='primary' className='w-full'>
+                <Button className='w-full' color='primary' type='submit'>
                   Send Message
                 </Button>
               </form>

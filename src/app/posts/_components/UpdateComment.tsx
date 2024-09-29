@@ -1,3 +1,6 @@
+import { Button } from '@nextui-org/button'
+import { FieldValues, SubmitHandler } from 'react-hook-form'
+
 import FormController from '@/src/components/form/FormController'
 import FormInput from '@/src/components/form/FormInput'
 import ModalController from '@/src/components/modals/ModalController'
@@ -6,8 +9,6 @@ import {
   useGetSingleComment,
   useUpdateComment,
 } from '@/src/hooks/comments.hook'
-import { Button } from '@nextui-org/button'
-import { FieldValues, SubmitHandler } from 'react-hook-form'
 
 const UpdateComment = ({ commentId, postId }) => {
   const { user } = useUser()

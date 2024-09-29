@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, Button, Spacer, Divider } from '@nextui-org/react'
+import { Card, Button, Divider } from '@nextui-org/react'
 import Image from 'next/image'
 
 export default function AboutPage() {
@@ -18,12 +18,12 @@ export default function AboutPage() {
       <div className='flex flex-col items-center mb-16 md:flex-row'>
         <div className='w-full md:w-1/2'>
           <Image
-            src='https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            alt='Tech Tips'
-            width={500}
-            height={350}
-            className='rounded-lg'
             priority
+            alt='Tech Tips'
+            className='rounded-lg'
+            height={350}
+            src='https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            width={500}
           />
         </div>
         <div className='w-full mt-8 md:w-1/2 md:mt-0 md:pl-10'>
@@ -55,12 +55,12 @@ export default function AboutPage() {
         </div>
         <div className='order-1 w-full md:w-1/2 md:order-2'>
           <Image
-            src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            alt='Tech Tutorials'
-            width={500}
-            height={350}
-            className='rounded-lg'
             priority
+            alt='Tech Tutorials'
+            className='rounded-lg'
+            height={350}
+            src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            width={500}
           />
         </div>
       </div>
@@ -71,12 +71,12 @@ export default function AboutPage() {
       <div className='flex flex-col items-center mb-16 md:flex-row'>
         <div className='w-full md:w-1/2'>
           <Image
-            src='https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            alt='Get Involved'
-            width={500}
-            height={350}
-            className='rounded-lg'
             priority
+            alt='Get Involved'
+            className='rounded-lg'
+            height={350}
+            src='https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            width={500}
           />
         </div>
         <div className='w-full mt-8 md:w-1/2 md:mt-0 md:pl-10'>

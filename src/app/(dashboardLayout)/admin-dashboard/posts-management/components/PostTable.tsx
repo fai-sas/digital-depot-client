@@ -10,12 +10,12 @@ import {
   TableCell,
   User,
   Tooltip,
-  Chip,
   Button,
 } from '@nextui-org/react'
 import { DeleteIcon, EditIcon, EyeIcon } from 'lucide-react'
-import { useDeletePost, useGetAllPosts } from '@/src/hooks/post.hook'
 import Link from 'next/link'
+
+import { useDeletePost, useGetAllPosts } from '@/src/hooks/post.hook'
 
 const columns = [
   { name: 'Post Details', uid: 'postDetails' },
@@ -77,15 +77,9 @@ export default function AllPosts() {
               </Tooltip>
             </Link>
             <Tooltip color='danger' content='Delete post'>
-              <Button
-                isIconOnly
-                isDisabled={deletePending}
-                onClick={deletePostHandler}
-              >
-                <span className='text-lg cursor-pointer text-danger active:opacity-50'>
-                  <DeleteIcon />
-                </span>
-              </Button>
+              <span className='text-lg cursor-pointer text-danger active:opacity-50'>
+                <DeleteIcon onClick={deletePostHandler} />
+              </span>
             </Tooltip>
           </div>
         )

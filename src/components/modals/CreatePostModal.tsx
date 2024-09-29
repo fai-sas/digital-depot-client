@@ -1,14 +1,16 @@
 'use client'
 
-import CreateBlogPost from '@/src/app/(dashboardLayout)/admin-dashboard/posts-management/components/CreatePost'
 import ModalController from './ModalController'
+
+import CreateBlogPost from '@/src/app/(dashboardLayout)/admin-dashboard/posts-management/components/CreatePost'
 
 export default function CreatePostModal() {
   return (
     <ModalController
-      buttonClassName='flex-1'
+      buttonClassName='flex justify-end p-4 '
       buttonText='Create Post'
       title='Create Post'
+      buttonVariant='ghost'
     >
       <CreateBlogPost />
     </ModalController>

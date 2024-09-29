@@ -1,15 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 import {
   followUser,
   getAllUsers,
-  getMyProfile,
   getSingleUser,
   unFollowUser,
   updateProfile,
 } from '../services/User'
-
-import toast from 'react-hot-toast'
 import { getCurrentUser } from '../services/Auth'
 
 export const useGetAllUsers = () => {

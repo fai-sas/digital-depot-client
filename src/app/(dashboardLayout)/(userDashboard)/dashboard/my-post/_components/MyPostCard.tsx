@@ -1,3 +1,4 @@
+import { useDeletePost } from '@/src/hooks/post.hook'
 import {
   Card,
   CardHeader,
@@ -5,13 +6,19 @@ import {
   Image,
   Button,
   CardFooter,
+  Tooltip,
 } from '@nextui-org/react'
-
 import { User } from '@nextui-org/user'
-
+import { DeleteIcon, EditIcon } from 'lucide-react'
 import Link from 'next/link'
 
 const MyPostCard = ({ post }) => {
+  const { mutate: deletePost, isPending: deletePending } = useDeletePost()
+
+  const deletePostHandler = () => {
+    deletePost(post?._id)
+  }
+
   return (
     <Card className='relative py-4 shadow-lg'>
       <CardHeader className='flex-col items-start px-4 pt-2 pb-0'>
@@ -42,12 +49,18 @@ const MyPostCard = ({ post }) => {
       </CardBody>
       <CardFooter className='flex items-center justify-between px-4 py-2'>
         <div className='flex items-center gap-2'>
-          <Button className='p-0 ' variant='ghost'>
-            Update Post
-          </Button>
-          <Button className='p-0 ' variant='ghost'>
-            Delete Post
-          </Button>
+          <Link href={`/posts/update/${post?._id}`}>
+            <Tooltip content='Edit post'>
+              <span className='text-lg cursor-pointer text-default-400 active:opacity-50'>
+                <EditIcon />
+              </span>
+            </Tooltip>
+          </Link>
+          <Tooltip color='danger' content='Delete post'>
+            <span className='text-lg cursor-pointer text-danger active:opacity-50'>
+              <DeleteIcon onClick={deletePostHandler} />
+            </span>
+          </Tooltip>
         </div>
       </CardFooter>
     </Card>

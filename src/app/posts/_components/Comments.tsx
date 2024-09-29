@@ -1,10 +1,12 @@
 'use client'
 
-import { Divider } from '@nextui-org/divider'
-import { useDeleteComment, useGetAllComments } from '@/src/hooks/comments.hook'
+
 import { User } from '@nextui-org/user'
 import { Button } from '@nextui-org/button'
+
 import UpdateComment from './UpdateComment'
+
+import { useDeleteComment, useGetAllComments } from '@/src/hooks/comments.hook'
 
 const Comments = ({ postId }: any) => {
   const { data, isLoading } = useGetAllComments()

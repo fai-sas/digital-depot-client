@@ -1,42 +1,21 @@
+import { Button } from '@nextui-org/button'
+import { FieldValues, SubmitHandler } from 'react-hook-form'
+
 import FormController from '@/src/components/form/FormController'
 import FormInput from '@/src/components/form/FormInput'
 import ModalController from '@/src/components/modals/ModalController'
-import { useUser } from '@/src/context/user.provider'
-import {
-  useGetSingleComment,
-  useUpdateComment,
-} from '@/src/hooks/comments.hook'
 import { useUpdateMyProfile } from '@/src/hooks/user.hook'
-import { Button } from '@nextui-org/button'
-import { EditIcon } from 'lucide-react'
-import { FieldValues, SubmitHandler } from 'react-hook-form'
+
 
 const UpdateProfile = ({ userProfile }) => {
-  // const { user } = useUser()
-
-  // const { data, isLoading } = useGetSingleComment(commentId)
-  // const comment = data?.data
-
-  // Default values for the form, initialized with the fetched comment data
   const defaultValues = {
     name: userProfile?.name,
     mobileNumber: userProfile?.mobileNumber,
   }
 
-  const {
-    mutate: handleUpdateProfile,
-    isPending,
-    isSuccess,
-  } = useUpdateMyProfile()
-
-  // Check if the comment data is still loading
-  // if (isLoading) {
-  //   return <p>Loading...</p>
-  // }
+  const { mutate: handleUpdateProfile, isPending } = useUpdateMyProfile()
 
   const onSubmit: SubmitHandler<FieldValues> = (profileData) => {
-    console.log(profileData)
-
     handleUpdateProfile(profileData)
   }
 
