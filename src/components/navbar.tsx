@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -12,17 +14,22 @@ import { Input } from '@nextui-org/input'
 import { link as linkStyles } from '@nextui-org/theme'
 import NextLink from 'next/link'
 import clsx from 'clsx'
+import { Button } from '@nextui-org/button'
+import { useRouter } from 'next/navigation'
+
+import { useUser } from '../context/user.provider'
 
 import NavbarDropdown from './NavbarDropdown'
 
 import { siteConfig } from '@/src/config/site'
 import { ThemeSwitch } from '@/src/components/theme-switch'
-import {
-  SearchIcon,
-  Logo,
-} from '@/src/components/icons'
+import { SearchIcon, Logo } from '@/src/components/icons'
+
 
 export const Navbar = () => {
+  const router = useRouter()
+  const { user } = useUser()
+
   const searchInput = (
     <Input
       aria-label='Search'
@@ -75,17 +82,20 @@ export const Navbar = () => {
         className='hidden sm:flex basis-1/5 sm:basis-full'
         justify='end'
       >
-        <NavbarDropdown />
-        <ThemeSwitch />
-      </NavbarContent>
+        {user?.email ? (
+          <NavbarItem className='hidden gap-2 sm:flex'>
+            <NavbarDropdown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className='hidden gap-2 sm:flex'>
+            <Button onClick={() => router.push('/login')}>Login</Button>
+          </NavbarItem>
+        )}
 
-      {/* <NavbarContent className='pl-4 sm:hidden basis-1' justify='end'>
-        <Link isExternal aria-label='Github' href={siteConfig?.links?.github}>
-          <GithubIcon className='text-default-500' />
-        </Link>
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent> */}
+        <NavbarItem className='hidden gap-2 sm:flex'>
+          <ThemeSwitch />
+        </NavbarItem>
+      </NavbarContent>
 
       <NavbarMenu>
         {searchInput}

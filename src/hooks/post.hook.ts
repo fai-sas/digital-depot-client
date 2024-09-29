@@ -9,6 +9,7 @@ import {
   getAllPosts,
   getMyPosts,
   getSinglePost,
+  searchPosts,
   updatePost,
   upVote,
 } from '../services/Post'
@@ -119,5 +120,12 @@ export const useDeletePost = () => {
     onError: (error) => {
       toast.error(error?.message)
     },
+  })
+}
+
+export const useSearchPosts = () => {
+  return useMutation({
+    mutationKey: ['SEARCH_POSTS'],
+    mutationFn: async (search: string) => await searchPosts(search),
   })
 }

@@ -1,39 +1,32 @@
-'use client'
+// 'use server'
 
-import PostCard from './PostCard'
-import CardSkeleton from './CardSkeleton'
+// import PostCard from './PostCard'
+// import Filtering from './Filtering'
 
-import { TPost } from '@/src/types'
-import { useGetAllPosts } from '@/src/hooks/post.hook'
+// import axiosInstance from '@/src/lib/AxiosInstance'
 
-const AllPosts = () => {
-  const { data, isLoading } = useGetAllPosts()
-  const posts = data?.data || []
+// const AllPosts = async ({ searchParams }: { searchParams: any }) => {
+//   const params = new URLSearchParams(searchParams)
 
-  return (
-    <section className='py-8'>
-      <h1 className='mb-8 text-3xl font-bold text-center text-purple-800'>
-        Recent Posts
-      </h1>
+//   const { data } = await axiosInstance.get(`/posts`, {
+//     params: {
+//       searchTerm: params.get('search'),
+//       category: params.get('category'),
+//     },
+//   })
 
-      {/* Loading state */}
-      {isLoading ? (
-        <div className='flex items-center justify-center w-full min-h-screen'>
-          <CardSkeleton />
-        </div>
-      ) : posts.length ? (
-        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
-          {posts.map((post: TPost) => (
-            <PostCard key={post._id} post={post} />
-          ))}
-        </div>
-      ) : (
-        <div className='flex items-center justify-center w-full min-h-screen'>
-          <h1 className='text-4xl text-gray-500'>No Posts Found!</h1>
-        </div>
-      )}
-    </section>
-  )
-}
+//   return (
+//     <section className='py-8'>
+//       <h1 className='mb-8 text-3xl font-bold text-center text-purple-800'>
+//         Recent Posts
+//       </h1>
+//       <Filtering />
 
-export default AllPosts
+//       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
+//         {data?.data?.map((post) => <PostCard key={post?._id} post={post} />)}
+//       </div>
+//     </section>
+//   )
+// }
+
+// export default AllPosts

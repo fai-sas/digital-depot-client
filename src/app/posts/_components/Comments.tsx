@@ -1,25 +1,24 @@
 'use client'
 
-
 import { User } from '@nextui-org/user'
-import { Button } from '@nextui-org/button'
+import { Tooltip } from '@nextui-org/react'
+import { DeleteIcon, EditIcon } from 'lucide-react'
 
 import UpdateComment from './UpdateComment'
-
 import { useDeleteComment, useGetAllComments } from '@/src/hooks/comments.hook'
+import { useUser } from '@/src/context/user.provider'
 
 const Comments = ({ postId }: any) => {
+  const { user } = useUser()
   const { data, isLoading } = useGetAllComments()
   const comments = data?.data || []
 
-  // Filter comments by postId
   const allComments = comments.filter(
     (comment: { post: any }) => comment?.post === postId
   )
 
   const { mutate: handleDeleteComment } = useDeleteComment()
 
-  // Updated handleDelete function to accept comment ID
   const handleDelete = (commentId: string) => {
     handleDeleteComment(commentId)
   }
@@ -35,26 +34,34 @@ const Comments = ({ postId }: any) => {
         allComments?.map((comment: any) => (
           <div
             key={comment?._id}
-            className='flex items-center gap-4 rounded-3xl'
+            className='flex items-center justify-between gap-4 py-2 rounded-3xl'
           >
-            <User
-              avatarProps={{
-                src: `${comment?.user?.profilePhoto}`,
-              }}
-              isFocusable={true}
-              name={comment?.user?.name}
-            />
-            <p>{comment?.comment}</p>
-            {/* Pass the specific comment ID to the delete handler */}
-            <Button>
-              <UpdateComment commentId={comment?._id} postId={postId} />
-            </Button>
-            <h1
-              className='cursor-pointer'
-              onClick={() => handleDelete(comment?._id)} // Pass comment._id to the handler
-            >
-              Delete Comment
-            </h1>
+            {/* Left Section: User info and Comment */}
+            <div className='flex items-center gap-4'>
+              <User
+                avatarProps={{
+                  src: `${comment?.user?.profilePhoto}`,
+                }}
+                isFocusable={true}
+                name={comment?.user?.name}
+              />
+              <p>{comment?.comment}</p>
+            </div>
+
+            {/* Right Section: Edit and Delete Icons */}
+            <div className='flex items-center gap-3'>
+              {user?._id === comment?.user?._id && (
+                <>
+                  <UpdateComment commentId={comment?._id} postId={postId} />
+
+                  <Tooltip color='danger' content='Delete Comment'>
+                    <span className='cursor-pointer text-danger active:opacity-50'>
+                      <DeleteIcon onClick={() => handleDelete(comment?._id)} />
+                    </span>
+                  </Tooltip>
+                </>
+              )}
+            </div>
           </div>
         ))
       ) : (

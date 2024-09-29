@@ -4,14 +4,14 @@ import { Button } from '@nextui-org/button'
 import Link from 'next/link'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import FormController from '@/src/components/form/FormController'
 import FormInput from '@/src/components/form/FormInput'
 import registerValidationSchema from '@/src/schemas/register.schema'
 import { useUserRegistration } from '@/src/hooks/auth.hook'
-import { useEffect } from 'react'
 
-import { useRouter, useSearchParams } from 'next/navigation'
 
 const RegisterPage = () => {
   const router = useRouter()

@@ -95,3 +95,13 @@ export const deletePost = async (postId: string): Promise<any> => {
     )
   }
 }
+
+export const searchPosts = async (search: string) => {
+  try {
+    const res = await axiosInstance.get(`/posts?search=${search}`)
+
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to search items')
+  }
+}

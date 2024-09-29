@@ -9,7 +9,7 @@ import {
 import { ReactNode } from 'react'
 
 interface IProps {
-  buttonText: string
+  buttonText: string | JSX.Element
   title: string
   children: ReactNode
   buttonVariant?:

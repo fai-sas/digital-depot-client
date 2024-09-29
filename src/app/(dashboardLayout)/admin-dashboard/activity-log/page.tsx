@@ -1,11 +1,10 @@
 'use client'
 
 import { User } from '@nextui-org/user'
-
 import moment from 'moment'
+import { Divider } from '@nextui-org/divider'
 
 import { useGetActivity } from '@/src/hooks/user.hook'
-import { Divider } from '@nextui-org/divider'
 
 const ActivityLogPage = () => {
   const { data, error, isLoading } = useGetActivity()

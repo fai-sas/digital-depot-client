@@ -56,7 +56,7 @@ export const useUpdateComment = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['ALL_COMMENTS', 'SINGLE_COMMENT'],
+        queryKey: ['ALL_COMMENTS'],
       })
       toast.success('Comment Updated Successfully')
     },

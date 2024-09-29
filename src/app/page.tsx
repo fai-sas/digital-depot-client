@@ -1,12 +1,12 @@
 import Hero from '../components/Hero'
 
-import AllPosts from './posts/_components/AllPosts'
+import HomePagePostCard from './posts/_components/HomePagePostCard'
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <AllPosts />
+      <HomePagePostCard />
     </>
   )
 }

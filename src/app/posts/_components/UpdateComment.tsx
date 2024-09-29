@@ -9,6 +9,7 @@ import {
   useGetSingleComment,
   useUpdateComment,
 } from '@/src/hooks/comments.hook'
+import { EditIcon } from 'lucide-react'
 
 const UpdateComment = ({ commentId, postId }) => {
   const { user } = useUser()
@@ -16,36 +17,41 @@ const UpdateComment = ({ commentId, postId }) => {
   const { data, isLoading } = useGetSingleComment(commentId)
   const comment = data?.data
 
-  const {
-    mutate: handleUpdateComment,
-    isPending,
-    isSuccess,
-  } = useUpdateComment()
+  const { mutate: handleUpdateComment, isPending } = useUpdateComment()
 
-  // Check if the comment data is still loading
   if (isLoading) {
     return <p>Loading...</p>
   }
 
-  // Default values for the form, initialized with the fetched comment data
   const defaultValues = {
-    comment: comment?.comment,
+    comment: comment?.comment || '',
   }
 
   const onSubmit: SubmitHandler<FieldValues> = (commentData) => {
-    // Ensure the commentData contains the postId, userId, and commentId for the update
+    if (!commentId) {
+      console.error('Comment ID is undefined!')
+      return
+    }
+
     handleUpdateComment({
-      ...commentData,
-      post: postId, // Include postId in the update
-      user: user?._id, // Include userId in the update
-      commentId, // Pass the comment ID for the specific comment being updated
+      commentId,
+      commentData: {
+        comment: commentData.comment,
+        post: postId,
+        user: user?._id,
+      },
     })
   }
 
   return (
     <ModalController
       buttonClassName='flex-1'
-      buttonText='Update Comment'
+      // buttonText='Edit'
+      buttonText={
+        <span>
+          <EditIcon />
+        </span>
+      }
       title='Update Comment'
     >
       <FormController defaultValues={defaultValues} onSubmit={onSubmit}>
@@ -58,7 +64,7 @@ const UpdateComment = ({ commentId, postId }) => {
           size='lg'
           type='submit'
         >
-          Update Comment
+          {isPending ? 'Updating...' : 'Update Comment'}
         </Button>
       </FormController>
     </ModalController>
