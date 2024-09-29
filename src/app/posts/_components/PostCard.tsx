@@ -48,7 +48,7 @@ export default function PostCard({ post }: TPost) {
       </CardHeader>
 
       <CardBody className='py-2'>
-        <Link href={`posts/${post?._id}`}>
+        <Link href={`/posts/${post?._id}`}>
           <Image
             alt='Post Image'
             className='object-cover rounded-xl'

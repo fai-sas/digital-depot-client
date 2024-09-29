@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use server'
 
 import { FieldValues } from 'react-hook-form'
@@ -32,6 +33,18 @@ export const getSinglePost = async (postId: string) => {
     return res.data
   } catch (error) {
     console.error('Failed to fetch data:', error)
+    throw new Error('Failed to fetch data')
+  }
+}
+
+export const getMyPosts = async () => {
+  try {
+    const res = await axiosInstance.get(`/posts/my-posts`)
+
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+
     throw new Error('Failed to fetch data')
   }
 }

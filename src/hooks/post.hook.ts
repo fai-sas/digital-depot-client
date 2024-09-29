@@ -7,6 +7,7 @@ import {
   deletePost,
   downVote,
   getAllPosts,
+  getMyPosts,
   getSinglePost,
   updatePost,
   upVote,
@@ -36,6 +37,13 @@ export const useGetSinglePost = (postId: string) => {
   return useQuery({
     queryKey: ['SINGLE_POST', postId],
     queryFn: async () => await getSinglePost(postId),
+  })
+}
+
+export const useGetMyPost = () => {
+  return useQuery({
+    queryKey: ['MY_POST'],
+    queryFn: async () => await getMyPosts(),
   })
 }
 

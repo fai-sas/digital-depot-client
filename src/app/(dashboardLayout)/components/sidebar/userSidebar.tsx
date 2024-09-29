@@ -9,7 +9,6 @@ import { SidebarItem } from './sidebar-item'
 import { SidebarMenu } from './sidebar-menu'
 import { CollapseItems } from './collapse-items'
 
-
 export const SidebarWrapper = () => {
   const pathname = usePathname()
   const { collapsed } = useSidebarContext()
@@ -26,7 +25,7 @@ export const SidebarWrapper = () => {
           {' '}
           <Link className='flex' href='/'>
             <Cog />
-            <p className='px-4 font-bold text-inherit'>APOLLO GEARS</p>
+            <p className='px-4 font-bold text-inherit'>Digital DIY Depot</p>
           </Link>
         </div>
 
@@ -40,43 +39,22 @@ export const SidebarWrapper = () => {
             />
             <SidebarMenu title='Main Menu'>
               <SidebarItem
-                href='/dashboard/rent-car'
+                href='/dashboard/my-post'
                 icon={<Car />}
-                isActive={pathname === '/dashboard/rent-car'}
-                title='rent-car'
+                isActive={pathname === '/dashboard/my-post'}
+                title='My Posts'
               />
               <SidebarItem
+                href='/dashboard/my-followers'
                 icon={<DollarSign />}
-                isActive={pathname === '/dashboard/payments'}
-                title='Payments'
-              />
-              <CollapseItems
-                icon={<History />}
-                items={['Banks Accounts', 'Credit Cards', 'Loans']}
-                title='Rent history'
+                isActive={pathname === '/dashboard/my-followers'}
+                title='My Followers'
               />
               <SidebarItem
+                href='/dashboard/my-profile'
                 icon={<Home />}
-                isActive={pathname === '/customers'}
-                title='Customers'
-              />
-              <SidebarItem
-                icon={<Home />}
-                isActive={pathname === '/products'}
-                title='Products'
-              />
-              <SidebarItem
-                icon={<Home />}
-                isActive={pathname === '/reports'}
-                title='Reports'
-              />
-            </SidebarMenu>
-
-            <SidebarMenu title='Updates'>
-              <SidebarItem
-                icon={<Home />}
-                isActive={pathname === '/changelog'}
-                title='Changelog'
+                isActive={pathname === '/dashboard/my-profile'}
+                title='My Profile'
               />
             </SidebarMenu>
           </div>

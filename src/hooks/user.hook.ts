@@ -3,11 +3,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   followUser,
   getAllUsers,
+  getMyProfile,
   getSingleUser,
   unFollowUser,
 } from '../services/User'
 
 import toast from 'react-hot-toast'
+import { getCurrentUser } from '../services/Auth'
 
 export const useGetAllUsers = () => {
   return useQuery({
@@ -20,6 +22,13 @@ export const useGetSingleUser = (userId: string) => {
   return useQuery({
     queryKey: ['SINGLE_USER', userId],
     queryFn: async () => await getSingleUser(userId),
+  })
+}
+
+export const useGetMyProfile = () => {
+  return useQuery({
+    queryKey: ['MY_PROFILE'],
+    queryFn: async () => await getCurrentUser(),
   })
 }
 

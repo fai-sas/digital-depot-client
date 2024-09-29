@@ -1,20 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
-import { UserLayout } from "./layout/userLayout";
+import { UserLayout } from './layout/userLayout'
 
 export const metadata: Metadata = {
-  title: "Dashboard - Apollo Gears",
-  description: "Next Level Riding Sharing Service",
-};
+  title: 'Dashboard - Digital DIY Depot',
+  description: 'Next Level Tech Tips and Tricks',
+}
 
 export default function UserDashboardLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <div>
       <UserLayout>{children}</UserLayout>
     </div>
-  );
+  )
 }
