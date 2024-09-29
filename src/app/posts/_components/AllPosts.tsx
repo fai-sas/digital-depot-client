@@ -1,27 +1,34 @@
 'use client'
 
 import PostCard from './PostCard'
-
 import { TPost } from '@/src/types'
 import { useGetAllPosts } from '@/src/hooks/post.hook'
+import CardSkeleton from './CardSkeleton'
 
 const AllPosts = () => {
   const { data, isLoading } = useGetAllPosts()
   const posts = data?.data || []
 
   return (
-    <section className='grid grid-cols-2 gap-4 py-4 md:grid-cols-3'>
-      {isLoading && (
-        <h1 className='p-8 text-4xl font-bold text-purple-800 '>Loading</h1>
-      )}
-      {posts?.length ? (
-        posts?.map((post: TPost) => <PostCard key={post?._id} post={post} />)
+    <section className='py-8'>
+      <h1 className='mb-8 text-3xl font-bold text-center text-purple-800'>
+        Recent Posts
+      </h1>
+
+      {/* Loading state */}
+      {isLoading ? (
+        <div className='flex items-center justify-center w-full min-h-screen'>
+          <CardSkeleton />
+        </div>
+      ) : posts.length ? (
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
+          {posts.map((post: TPost) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
       ) : (
-        <div className='flex items-center justify-center w-full min-h-screen rounded-md bg-default-100'>
-          {isLoading && (
-            <h1 className='p-8 text-4xl font-bold text-purple-800 '>Loading</h1>
-          )}
-          <h1 className='text-4xl'>No Post Found!</h1>
+        <div className='flex items-center justify-center w-full min-h-screen'>
+          <h1 className='text-4xl text-gray-500'>No Posts Found!</h1>
         </div>
       )}
     </section>

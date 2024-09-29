@@ -35,10 +35,10 @@ const RegisterPage = () => {
         <FormController
           //! Only for development
           defaultValues={{
-            name: 'John Doe',
-            email: 'user10@user.com',
-            mobileNumber: '01711223344',
-            password: '123456',
+            name: '',
+            email: '',
+            mobileNumber: '',
+            password: '',
           }}
           resolver={zodResolver(registerValidationSchema)}
           onSubmit={onSubmit}
