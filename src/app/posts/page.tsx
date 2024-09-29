@@ -27,6 +27,7 @@ import FormInput from '@/src/components/form/FormInput'
 import { ImageUploader } from '@/src/components/ImageUploader'
 import FormSelect from '@/src/components/form/FormSelect'
 import { useUser } from '@/src/context/user.provider'
+import AllPosts from './_components/AllPosts'
 
 export default function CreateBlogPost() {
   const [description, setDescription] = useState('')
@@ -115,6 +116,7 @@ export default function CreateBlogPost() {
           </form>
         </FormProvider>
       </div>
+      <AllPosts />
     </>
   )
 }
