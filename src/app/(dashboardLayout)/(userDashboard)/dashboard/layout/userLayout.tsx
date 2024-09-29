@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { NavbarWrapper } from "@/app/(dashboardLayout)/components/dashboardNabbar/dashboardNavbar";
-import { SidebarWrapper } from "@/app/(dashboardLayout)/components/sidebar/sidebar.styles";
+import { NavbarWrapper } from '../../../components/dashboardNavbar/dashboardNavbar'
+import { SidebarWrapper } from '../../../components/sidebar/userSidebar'
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const UserLayout = ({ children }: Props) => {
   return (
-    <section className="flex">
+    <section className='flex'>
       <SidebarWrapper />
 
       <NavbarWrapper>{children}</NavbarWrapper>
     </section>
-  );
-};
+  )
+}

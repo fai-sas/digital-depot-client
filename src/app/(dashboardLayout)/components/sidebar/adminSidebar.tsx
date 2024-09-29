@@ -10,8 +10,6 @@ import { SidebarItem } from './sidebar-item'
 import { SidebarMenu } from './sidebar-menu'
 import { Sidebar } from './sidebar.styles'
 
-
-
 export const AdminSidebarWrapper = () => {
   const pathname = usePathname()
   const { collapsed } = useSidebarContext()
@@ -41,16 +39,16 @@ export const AdminSidebarWrapper = () => {
             />
             <SidebarMenu title='Main Menu'>
               <SidebarItem
-                href='/admin-dashboard/cars-management'
+                href='/admin-dashboard/posts-management'
                 icon={<Car />}
-                isActive={pathname === '/admin-dashboard/cars-management'}
-                title='cars manage'
+                isActive={pathname === '/admin-dashboard/posts-management'}
+                title='manage cars'
               />
               <SidebarItem
-                href='/admin-dashboard/users-management'
+                href='/admin-dashboard/user-management'
                 icon={<User />}
-                isActive={pathname === '/admin-dashboard/users-management'}
-                title='users manage'
+                isActive={pathname === '/admin-dashboard/user-management'}
+                title='manage users'
               />
               <CollapseItems
                 icon={<Home />}
