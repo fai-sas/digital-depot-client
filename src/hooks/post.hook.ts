@@ -8,6 +8,7 @@ import {
   downVote,
   getAllPosts,
   getSinglePost,
+  updatePost,
   upVote,
 } from '../services/Post'
 
@@ -31,7 +32,7 @@ export const useGetAllPosts = () => {
   })
 }
 
-export const useSingleAllPost = (postId: string) => {
+export const useGetSinglePost = (postId: string) => {
   return useQuery({
     queryKey: ['SINGLE_POST', postId],
     queryFn: async () => await getSinglePost(postId),
@@ -65,6 +66,30 @@ export const useDownVote = () => {
       toast.success('Post Down Voted Successfully')
     },
     onError: (error) => {
+      toast.error(error?.message)
+    },
+  })
+}
+
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['UPDATE_POST'],
+    mutationFn: async ({
+      postId,
+      postData,
+    }: {
+      postId: string
+      postData: any
+    }) => {
+      return await updatePost(postId, postData)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_POSTS'] })
+      toast.success('Post Updated Successfully')
+    },
+    onError: (error: any) => {
       toast.error(error?.message)
     },
   })

@@ -56,6 +56,21 @@ export const downVote = async (postId: string): Promise<any> => {
   }
 }
 
+export const updatePost = async (
+  postId: string,
+  postData: any
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.put(`/posts/update/${postId}`, postData)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || 'Error while updating post'
+    )
+  }
+}
+
 export const deletePost = async (postId: string): Promise<any> => {
   try {
     const res = await axiosInstance.delete(`/posts/${postId}`)

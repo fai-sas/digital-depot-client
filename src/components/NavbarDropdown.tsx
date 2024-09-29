@@ -9,7 +9,6 @@ import {
 import { usePathname, useRouter } from 'next/navigation'
 import { User } from '@nextui-org/react'
 
-
 import { logout } from '../services/Auth'
 import { protectedRoutes } from '../utils/protectedRoutes'
 
@@ -47,17 +46,10 @@ export default function NavbarDropdown() {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label='Static Actions'>
-          <DropdownItem onClick={() => handleNavigation('/profile')}>
-            Profile
+          <DropdownItem onClick={() => handleNavigation('/admin-dashboard')}>
+            Dashboard
           </DropdownItem>
-          <DropdownItem onClick={() => handleNavigation('/profile/settings')}>
-            Settings
-          </DropdownItem>
-          <DropdownItem
-            onClick={() => handleNavigation('/profile/create-post')}
-          >
-            Create Post
-          </DropdownItem>
+
           <DropdownItem
             key='delete'
             className='text-danger'

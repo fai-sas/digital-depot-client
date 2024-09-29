@@ -13,7 +13,6 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = accessToken
     }
-    console.log(accessToken)
 
     return config
   },

@@ -69,11 +69,13 @@ export default function AllPosts() {
                 </span>
               </Tooltip>
             </Link>
-            <Tooltip content='Edit post'>
-              <span className='text-lg cursor-pointer text-default-400 active:opacity-50'>
-                <EditIcon />
-              </span>
-            </Tooltip>
+            <Link href={`/posts/update/${post?._id}`}>
+              <Tooltip content='Edit post'>
+                <span className='text-lg cursor-pointer text-default-400 active:opacity-50'>
+                  <EditIcon />
+                </span>
+              </Tooltip>
+            </Link>
             <Tooltip color='danger' content='Delete post'>
               <Button
                 isIconOnly

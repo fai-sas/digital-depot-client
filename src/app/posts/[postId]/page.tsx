@@ -1,6 +1,7 @@
-import SinglePost from '../_components/SinglePost'
+'use client'
 
-import { getSinglePost } from '@/src/services/Post'
+import SinglePost from '../_components/SinglePost'
+import { useGetSinglePost } from '@/src/hooks/post.hook'
 
 interface IProps {
   params: {
@@ -8,12 +9,14 @@ interface IProps {
   }
 }
 
-const PostDetailPage = async ({ params: { postId } }: IProps) => {
-  const { data: post } = await getSinglePost(postId)
+const PostDetailPage = ({ params: { postId } }: IProps) => {
+  const { data } = useGetSinglePost(postId)
+
+  const post = data?.data
 
   return (
     <div className='mx-auto my-3 max-w-[720px]'>
-      <SinglePost key={post?._id} post={post} />
+      {post ? <SinglePost post={post} /> : <p>Loading...</p>}
     </div>
   )
 }

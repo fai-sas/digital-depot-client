@@ -1,9 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable padding-line-between-statements */
-/* eslint-disable unused-imports/no-unused-imports */
-/* eslint-disable import/order */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
 import {
@@ -12,32 +6,30 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-
 import { Button } from '@nextui-org/button'
 import { Divider } from '@nextui-org/divider'
-
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import { useGetSinglePost, useUpdatePost } from '@/src/hooks/post.hook'
+import FormInput from '@/src/components/form/FormInput'
+import FormSelect from '@/src/components/form/FormSelect'
+import { ImageUploader } from '@/src/components/ImageUploader'
+import { useUser } from '@/src/context/user.provider'
 
 // Dynamically import ReactQuill to handle SSR
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
-import { useCreatePost } from '@/src/hooks/post.hook'
-import FormInput from '@/src/components/form/FormInput'
-import { ImageUploader } from '@/src/components/ImageUploader'
-import FormSelect from '@/src/components/form/FormSelect'
-import { useUser } from '@/src/context/user.provider'
 
-export default function CreateBlogPost() {
+export default function EditPost({ postId }: { postId: string }) {
   const [description, setDescription] = useState('')
+
+  const { data } = useGetSinglePost(postId)
+  const post = data?.data
 
   const { user } = useUser()
 
-  const {
-    mutate: handleCreatePost,
-    isPending: createPostPending,
-    isSuccess,
-  } = useCreatePost()
+  const { mutate: handleUpdatePost, isPending: updatePostPending } =
+    useUpdatePost()
 
   const categoryOptions = [
     { key: 'Web', label: 'Web' },
@@ -51,23 +43,38 @@ export default function CreateBlogPost() {
       title: '',
       description: '',
       images: [],
-      category: 'Web',
+      category: '',
     },
   })
 
-  const { handleSubmit, setValue } = methods
+  const { handleSubmit, reset, setValue } = methods
+
+  // Effect to reset form values when the post data is loaded
+  useEffect(() => {
+    if (post) {
+      reset({
+        title: post?.title || '',
+        description: post?.description || '',
+        images: post?.images || [],
+        category: post?.category || '',
+      })
+      setDescription(post?.description || '')
+    }
+  }, [post, reset])
 
   const onSubmit: SubmitHandler<FieldValues> = (postData) => {
     postData.description = description
     postData.postedBy = user?._id
 
-    handleCreatePost(postData)
+    handleUpdatePost({
+      postId,
+      postData,
+    })
   }
 
   return (
     <>
-      <h1 className='p-8 text-2xl font-bold '>Create New Post</h1>
-
+      <h1 className='p-8 text-2xl font-bold '>Update Post</h1>
       <div>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,8 +115,8 @@ export default function CreateBlogPost() {
 
             {/* Submit Button */}
             <div className='flex justify-end'>
-              <Button disabled={createPostPending} size='lg' type='submit'>
-                Post
+              <Button disabled={updatePostPending} size='lg' type='submit'>
+                Update Post
               </Button>
             </div>
           </form>

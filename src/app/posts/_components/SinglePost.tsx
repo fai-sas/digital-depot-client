@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import DOMPurify from 'dompurify'
 import { User } from '@nextui-org/user'
@@ -20,13 +18,13 @@ const SinglePost = ({ post }) => {
         isFocusable={true}
         name={post?.postedBy?.name}
       />
-      <p>Published on {moment(createdAt).format('D MMMM  YYYY')}</p>
+      {/* <p>Published on {moment(createdAt).format('D MMMM  YYYY')}</p> */}
       <div className='pb-4 border-b border-default-200'>
         <Image
           alt='Card background'
           className='object-cover rounded-xl'
           height={500}
-          src={images[0]}
+          src={images?.[0]}
           width={1000}
         />
         <p className='py-4'>{category}</p>

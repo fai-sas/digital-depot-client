@@ -1,5 +1,5 @@
 import { Avatar, Tooltip } from '@nextui-org/react'
-import { Car, Cog, Home, User } from 'lucide-react'
+import { FolderPen, Cog, Home, User, CircleDollarSign } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -40,17 +40,24 @@ export const AdminSidebarWrapper = () => {
             <SidebarMenu title='Main Menu'>
               <SidebarItem
                 href='/admin-dashboard/posts-management'
-                icon={<Car />}
+                icon={<FolderPen />}
                 isActive={pathname === '/admin-dashboard/posts-management'}
-                title='manage cars'
+                title='Manage Posts'
               />
               <SidebarItem
                 href='/admin-dashboard/user-management'
                 icon={<User />}
                 isActive={pathname === '/admin-dashboard/user-management'}
-                title='manage users'
+                title='Manage Users'
               />
-              <CollapseItems
+              <SidebarItem
+                href='/admin-dashboard/payment-history'
+                icon={<CircleDollarSign />}
+                isActive={pathname === '/admin-dashboard/payment-history'}
+                title='Payment History'
+              />
+            </SidebarMenu>
+            {/* <CollapseItems
                 icon={<Home />}
                 items={['Banks Accounts', 'Credit Cards']}
                 title='Balances'
@@ -88,17 +95,17 @@ export const AdminSidebarWrapper = () => {
                 isActive={pathname === '/settings'}
                 title='Settings'
               />
-            </SidebarMenu>
+            </SidebarMenu> */}
 
-            <SidebarMenu title='Updates'>
+            {/* <SidebarMenu title='Updates'>
               <SidebarItem
                 icon={<Home />}
                 isActive={pathname === '/changelog'}
                 title='Changelog'
               />
-            </SidebarMenu>
+            // </SidebarMenu> */}
           </div>
-          <div className={Sidebar.Footer()}>
+          {/* <div className={Sidebar.Footer()}>
             <Tooltip color='primary' content={'Settings'}>
               <div className='max-w-fit'>
                 <Home />
@@ -115,7 +122,7 @@ export const AdminSidebarWrapper = () => {
                 src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
               />
             </Tooltip>
-          </div>
+          </div> */}
         </div>
       </div>
     </aside>

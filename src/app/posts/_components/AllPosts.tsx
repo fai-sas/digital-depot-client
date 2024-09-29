@@ -15,7 +15,7 @@ const AllPosts = () => {
         <h1 className='p-8 text-4xl font-bold text-purple-800 '>Loading</h1>
       )}
       {posts?.length ? (
-        posts.map((post: TPost) => <PostCard key={post?._id} post={post} />)
+        posts?.map((post: TPost) => <PostCard key={post?._id} post={post} />)
       ) : (
         <div className='flex items-center justify-center w-full min-h-screen rounded-md bg-default-100'>
           {isLoading && (

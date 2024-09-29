@@ -23,7 +23,7 @@ export const NavbarWrapper = ({ children }: Props) => {
           wrapper: 'w-full max-w-full',
         }}
       >
-        <NavbarContent className='md:hidden'>
+        {/* <NavbarContent className='md:hidden'>
           {collapsed ? (
             <ChevronLeft onClick={setCollapsed} />
           ) : (
@@ -47,7 +47,7 @@ export const NavbarWrapper = ({ children }: Props) => {
           justify='end'
         >
           <UserDropdown />
-        </NavbarContent>
+        </NavbarContent> */}
       </Navbar>
       {children}
     </div>

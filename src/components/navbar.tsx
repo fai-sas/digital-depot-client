@@ -79,30 +79,17 @@ export const Navbar = () => {
         className='hidden sm:flex basis-1/5 sm:basis-full'
         justify='end'
       >
-        <NavbarItem className='hidden gap-2 sm:flex'>
-          <Link isExternal aria-label='Twitter' href={siteConfig.links.twitter}>
-            <TwitterIcon className='text-default-500' />
-          </Link>
-          <Link isExternal aria-label='Discord' href={siteConfig.links.discord}>
-            <DiscordIcon className='text-default-500' />
-          </Link>
-          <Link isExternal aria-label='Github' href={siteConfig.links.github}>
-            <GithubIcon className='text-default-500' />
-          </Link>
-          <ThemeSwitch />
-        </NavbarItem>
-        <NavbarItem className='hidden lg:flex'>{searchInput}</NavbarItem>
-
         <NavbarDropdown />
+        <ThemeSwitch />
       </NavbarContent>
 
-      <NavbarContent className='pl-4 sm:hidden basis-1' justify='end'>
-        <Link isExternal aria-label='Github' href={siteConfig.links.github}>
+      {/* <NavbarContent className='pl-4 sm:hidden basis-1' justify='end'>
+        <Link isExternal aria-label='Github' href={siteConfig?.links?.github}>
           <GithubIcon className='text-default-500' />
         </Link>
         <ThemeSwitch />
         <NavbarMenuToggle />
-      </NavbarContent>
+      </NavbarContent> */}
 
       <NavbarMenu>
         {searchInput}
