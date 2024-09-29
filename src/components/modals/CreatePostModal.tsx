@@ -9,8 +9,8 @@ export default function CreatePostModal() {
     <ModalController
       buttonClassName='flex justify-end p-4 '
       buttonText='Create Post'
-      title='Create Post'
       buttonVariant='ghost'
+      title='Create Post'
     >
       <CreateBlogPost />
     </ModalController>

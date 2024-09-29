@@ -10,7 +10,6 @@ import {
   TableCell,
   User,
   Tooltip,
-  Button,
 } from '@nextui-org/react'
 import { DeleteIcon, EditIcon, EyeIcon } from 'lucide-react'
 import Link from 'next/link'

@@ -1,4 +1,3 @@
-import { Button } from '@nextui-org/button'
 
 import PostTable from './components/PostTable'
 

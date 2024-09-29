@@ -1,4 +1,4 @@
-import { FolderPen, Cog, Home, User, CircleDollarSign } from 'lucide-react'
+import { FolderPen, Cog, Home, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -49,11 +49,17 @@ export const AdminSidebarWrapper = () => {
                 title='Manage Users'
               />
               <SidebarItem
+                href='/admin-dashboard/activity-log'
+                icon={<Cog />}
+                isActive={pathname === '/admin-dashboard/activity-log'}
+                title='Activity Log'
+              />
+              {/* <SidebarItem
                 href='/admin-dashboard/payment-history'
                 icon={<CircleDollarSign />}
                 isActive={pathname === '/admin-dashboard/payment-history'}
                 title='Payment History'
-              />
+              /> */}
             </SidebarMenu>
             {/* <CollapseItems
                 icon={<Home />}

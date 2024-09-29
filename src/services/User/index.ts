@@ -24,6 +24,17 @@ export const getSingleUser = async (userId: string) => {
   }
 }
 
+export const getActivities = async () => {
+  try {
+    const res = await axiosInstance.get(`/activity`)
+
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+    throw new Error('Failed to fetch data')
+  }
+}
+
 export const updateProfile = async () => {
   try {
     const res = await axiosInstance.put(`/user/profile/update`)
@@ -37,7 +48,7 @@ export const updateProfile = async () => {
 
 export const followUser = async (followUserId: string): Promise<any> => {
   try {
-    const res = await axiosInstance.post(`user/follow/${followUserId}`)
+    const res = await axiosInstance.post(`/user/follow/${followUserId}`)
 
     return res.data
   } catch (error: any) {
@@ -47,7 +58,37 @@ export const followUser = async (followUserId: string): Promise<any> => {
 
 export const unFollowUser = async (unFollowUserId: string): Promise<any> => {
   try {
-    const res = await axiosInstance.post(`user/unfollow/${unFollowUserId}`)
+    const res = await axiosInstance.post(`/user/unfollow/${unFollowUserId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
+export const blockUser = async (userId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.put(`/user/block-user/${userId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
+export const makeAdmin = async (userId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.put(`/user/make-admin/${userId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
+export const deleteUser = async (userId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.delete(`/user/delete-user/${userId}`)
 
     return res.data
   } catch (error: any) {

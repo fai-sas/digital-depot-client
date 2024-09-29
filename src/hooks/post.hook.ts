@@ -14,10 +14,13 @@ import {
 } from '../services/Post'
 
 export const useCreatePost = () => {
+  const queryClient = useQueryClient()
+
   return useMutation<any, Error, FieldValues>({
     mutationKey: ['CREATE_POST'],
     mutationFn: async (postData) => await createPost(postData),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_POSTS'] })
       toast.success('Post Created Successfully')
     },
     onError: (error) => {

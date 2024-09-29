@@ -7,8 +7,8 @@ import { getCurrentUser } from './services/Auth'
 const AuthRoutes = ['/login', '/register']
 
 const roleBasedRoutes = {
-  USER: [/^\/profile/],
-  ADMIN: [/^\/admin/],
+  USER: [/^\/dashboard/],
+  ADMIN: [/^\/admin-dashboard/],
 }
 
 type Role = keyof typeof roleBasedRoutes
@@ -40,6 +40,12 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // matcher: ['/profile', '/profile/:page*', '/admin', '/login', '/register'],
-  matcher: ['/docs', '/pricing', '/admin', '/login', '/register'],
+  matcher: [
+    '/dashboard',
+    '/profile/:page*',
+    '/admin-dashboard',
+    '/admin-dashboard/:page*',
+    '/login',
+    '/register',
+  ],
 }

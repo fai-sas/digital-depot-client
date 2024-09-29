@@ -9,9 +9,21 @@ import FormController from '@/src/components/form/FormController'
 import FormInput from '@/src/components/form/FormInput'
 import registerValidationSchema from '@/src/schemas/register.schema'
 import { useUserRegistration } from '@/src/hooks/auth.hook'
+import { useEffect } from 'react'
+
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const RegisterPage = () => {
-  const { mutate: handleUserRegistration, isPending } = useUserRegistration()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const redirect = searchParams.get('redirect')
+
+  const {
+    mutate: handleUserRegistration,
+    isPending,
+    isSuccess,
+  } = useUserRegistration()
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const userData = {
@@ -22,6 +34,16 @@ const RegisterPage = () => {
 
     handleUserRegistration(userData)
   }
+
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        router.push('/login')
+      }
+    }
+  }, [isPending, isSuccess])
 
   if (isPending) {
     return <h1 className='p-12 text-4xl font-bold '>Loading...</h1>

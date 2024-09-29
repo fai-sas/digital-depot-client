@@ -46,9 +46,17 @@ export default function NavbarDropdown() {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label='Static Actions'>
-          <DropdownItem onClick={() => handleNavigation('/admin-dashboard')}>
-            Dashboard
-          </DropdownItem>
+          {currentUser?.role === 'ADMIN' && (
+            <DropdownItem onClick={() => handleNavigation('/admin-dashboard')}>
+              Dashboard
+            </DropdownItem>
+          )}
+
+          {currentUser?.role === 'USER' && (
+            <DropdownItem onClick={() => handleNavigation('/dashboard')}>
+              Dashboard
+            </DropdownItem>
+          )}
 
           <DropdownItem
             key='delete'

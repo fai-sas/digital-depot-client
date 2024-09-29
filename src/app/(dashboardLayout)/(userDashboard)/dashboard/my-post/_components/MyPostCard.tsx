@@ -1,16 +1,16 @@
-import { useDeletePost } from '@/src/hooks/post.hook'
 import {
   Card,
   CardHeader,
   CardBody,
   Image,
-  Button,
   CardFooter,
   Tooltip,
 } from '@nextui-org/react'
 import { User } from '@nextui-org/user'
 import { DeleteIcon, EditIcon } from 'lucide-react'
 import Link from 'next/link'
+
+import { useDeletePost } from '@/src/hooks/post.hook'
 
 const MyPostCard = ({ post }) => {
   const { mutate: deletePost, isPending: deletePending } = useDeletePost()

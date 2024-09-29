@@ -2,9 +2,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
 import {
+  blockUser,
+  deleteUser,
   followUser,
+  getActivities,
   getAllUsers,
   getSingleUser,
+  makeAdmin,
   unFollowUser,
   updateProfile,
 } from '../services/User'
@@ -21,6 +25,13 @@ export const useGetSingleUser = (userId: string) => {
   return useQuery({
     queryKey: ['SINGLE_USER', userId],
     queryFn: async () => await getSingleUser(userId),
+  })
+}
+
+export const useGetActivity = () => {
+  return useQuery({
+    queryKey: ['ACTIVITY'],
+    queryFn: async () => await getActivities(),
   })
 }
 
@@ -74,6 +85,53 @@ export const useUnFollowUser = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ALL_USERS', 'SINGLE_USER'] })
       toast.success('User Un Followed Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
+  })
+}
+
+export const useBlockUser = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<any, Error, string>({
+    mutationKey: ['BLOCK_USER'],
+    mutationFn: async (userId) => await blockUser(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_USERS'] })
+      toast.success('User Status Updated Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
+  })
+}
+
+export const useMakeAdmin = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<any, Error, string>({
+    mutationKey: ['MAKE_ADMIN'],
+    mutationFn: async (userId) => await makeAdmin(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_USERS'] })
+      toast.success('User Status Updated Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
+  })
+}
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<any, Error, string>({
+    mutationKey: ['DELETE_USER'],
+    mutationFn: async (userId) => await deleteUser(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_USERS'] })
+      toast.success('User Deleted Successfully')
     },
     onError: (error) => {
       toast.error(error?.message)

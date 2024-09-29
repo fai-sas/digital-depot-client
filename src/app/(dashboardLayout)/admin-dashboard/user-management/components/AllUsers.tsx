@@ -15,7 +15,12 @@ import {
 } from '@nextui-org/react'
 import { DeleteIcon, EditIcon, EyeIcon } from 'lucide-react'
 
-import { useGetAllUsers } from '@/src/hooks/user.hook'
+import {
+  useBlockUser,
+  useDeleteUser,
+  useGetAllUsers,
+  useMakeAdmin,
+} from '@/src/hooks/user.hook'
 
 const columns = [
   { name: 'NAME', uid: 'name' },
@@ -31,16 +36,35 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 }
 
 export default function AllUsers() {
-  const { data, isLoading, isError } = useGetAllUsers() // Fetching data from the API
+  const { data, isLoading, isError } = useGetAllUsers()
   const users = data?.data || []
 
-  // Handle loading and error states
+  const { mutate: handleMakeAdmin, isPending: makeAdminPending } =
+    useMakeAdmin()
+
+  const { mutate: handleBlockUser, isPending: blockUserPending } =
+    useBlockUser()
+
+  const { mutate: handleDeleteUser, isPending: deleteUserPending } =
+    useDeleteUser()
+
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Error loading users data</div>
 
-  // Function to render individual cells based on column key
   const renderCell = (user, columnKey) => {
     const cellValue = user[columnKey]
+
+    const makeAdmin = () => {
+      handleMakeAdmin(user._id) // Pass individual user's _id
+    }
+
+    const blockUser = () => {
+      handleBlockUser(user._id) // Pass individual user's _id
+    }
+
+    const deleteUser = () => {
+      handleDeleteUser(user._id) // Pass individual user's _id
+    }
 
     switch (columnKey) {
       case 'name':
@@ -64,7 +88,7 @@ export default function AllUsers() {
         return (
           <Chip
             className='capitalize'
-            color={statusColorMap[user.status.toLowerCase()]} // Handle status color
+            color={statusColorMap[user.status.toLowerCase()]}
             size='sm'
             variant='flat'
           >
@@ -74,18 +98,29 @@ export default function AllUsers() {
       case 'actions':
         return (
           <div className='relative flex items-center gap-2'>
-            <Tooltip content='Details'>
-              <span className='text-lg cursor-pointer text-default-400 active:opacity-50'>
+            <Tooltip content='Make Admin'>
+              <span
+                className='text-lg cursor-pointer text-default-400 active:opacity-50'
+                onClick={makeAdmin}
+              >
                 <EyeIcon />
               </span>
             </Tooltip>
-            <Tooltip content='Edit user'>
-              <span className='text-lg cursor-pointer text-default-400 active:opacity-50'>
+
+            <Tooltip content='Block User'>
+              <span
+                className='text-lg cursor-pointer text-default-400 active:opacity-50'
+                onClick={blockUser}
+              >
                 <EditIcon />
               </span>
             </Tooltip>
-            <Tooltip color='danger' content='Delete user'>
-              <span className='text-lg cursor-pointer text-danger active:opacity-50'>
+
+            <Tooltip color='danger' content='Delete User'>
+              <span
+                className='text-lg cursor-pointer text-danger active:opacity-50'
+                onClick={deleteUser}
+              >
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -110,7 +145,7 @@ export default function AllUsers() {
       </TableHeader>
       <TableBody>
         {users?.map((user) => (
-          <TableRow key={user?.id}>
+          <TableRow key={user?._id}>
             {columns.map((column) => (
               <TableCell key={column?.uid}>
                 {renderCell(user, column?.uid)}
