@@ -14,6 +14,8 @@ axiosInstance.interceptors.request.use(
       config.headers.Authorization = accessToken
     }
 
+    console.log(accessToken)
+
     return config
   },
   function (error) {

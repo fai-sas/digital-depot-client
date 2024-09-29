@@ -1,6 +1,7 @@
 'use server'
 
 import axiosInstance from '@/src/lib/AxiosInstance'
+import { FieldValues } from 'react-hook-form'
 
 export const getAllUsers = async () => {
   try {
@@ -21,5 +22,25 @@ export const getSingleUser = async (userId: string) => {
   } catch (error) {
     console.error('Failed to fetch data:', error)
     throw new Error('Failed to fetch data')
+  }
+}
+
+export const followUser = async (followUserId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(`user/follow/${followUserId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
+export const unFollowUser = async (unFollowUserId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(`user/unfollow/${unFollowUserId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error)
   }
 }

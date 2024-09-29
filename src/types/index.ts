@@ -28,6 +28,8 @@ export interface IUser {
   role: string
   email: string
   status: string
+  followers: string[]
+  following: string[]
   mobileNumber: string
   profilePhoto: string
   createdAt?: string
