@@ -55,3 +55,15 @@ export const downVote = async (postId: string): Promise<any> => {
     throw new Error(error.response?.data?.message || 'Error while up voting')
   }
 }
+
+export const deletePost = async (postId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.delete(`/posts/${postId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || 'Error while deleting post'
+    )
+  }
+}

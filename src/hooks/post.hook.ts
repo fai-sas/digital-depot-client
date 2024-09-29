@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 
 import {
   createPost,
+  deletePost,
   downVote,
   getAllPosts,
   getSinglePost,
@@ -52,6 +53,7 @@ export const useUpVote = () => {
     },
   })
 }
+
 export const useDownVote = () => {
   const queryClient = useQueryClient()
 
@@ -61,6 +63,22 @@ export const useDownVote = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ALL_POSTS'] })
       toast.success('Post Down Voted Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
+  })
+}
+
+export const useDeletePost = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['DELETE_POST'],
+    mutationFn: async (postId: string) => await deletePost(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_POSTS'] })
+      toast.success('Post Deleted Successfully')
     },
     onError: (error) => {
       toast.error(error?.message)

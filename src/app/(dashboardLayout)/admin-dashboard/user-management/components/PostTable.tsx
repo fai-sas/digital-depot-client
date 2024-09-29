@@ -11,9 +11,10 @@ import {
   User,
   Tooltip,
   Chip,
+  Button,
 } from '@nextui-org/react'
 import { DeleteIcon, EditIcon, EyeIcon } from 'lucide-react'
-import { useGetAllPosts } from '@/src/hooks/post.hook'
+import { useDeletePost, useGetAllPosts } from '@/src/hooks/post.hook'
 import Link from 'next/link'
 
 const columns = [
@@ -27,12 +28,18 @@ export default function AllPosts() {
   const { data, isLoading, isError } = useGetAllPosts() // Fetching post data from the API
   const posts = data?.data || []
 
+  const { mutate: deletePost, isPending: deletePending } = useDeletePost()
+
   // Handle loading and error states
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Error loading posts data</div>
 
   // Function to render individual cells based on column key
   const renderCell = (post, columnKey) => {
+    const deletePostHandler = () => {
+      deletePost(post?._id)
+    }
+
     switch (columnKey) {
       case 'postDetails':
         return (
@@ -68,9 +75,15 @@ export default function AllPosts() {
               </span>
             </Tooltip>
             <Tooltip color='danger' content='Delete post'>
-              <span className='text-lg cursor-pointer text-danger active:opacity-50'>
-                <DeleteIcon />
-              </span>
+              <Button
+                isIconOnly
+                isDisabled={deletePending}
+                onClick={deletePostHandler}
+              >
+                <span className='text-lg cursor-pointer text-danger active:opacity-50'>
+                  <DeleteIcon />
+                </span>
+              </Button>
             </Tooltip>
           </div>
         )
