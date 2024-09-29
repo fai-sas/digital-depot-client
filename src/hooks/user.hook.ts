@@ -6,6 +6,7 @@ import {
   getMyProfile,
   getSingleUser,
   unFollowUser,
+  updateProfile,
 } from '../services/User'
 
 import toast from 'react-hot-toast'
@@ -29,6 +30,24 @@ export const useGetMyProfile = () => {
   return useQuery({
     queryKey: ['MY_PROFILE'],
     queryFn: async () => await getCurrentUser(),
+  })
+}
+
+export const useUpdateMyProfile = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['UPDATE_PROFILE'],
+    mutationFn: async () => await updateProfile(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['MY_PROFILE', 'SINGLE_USER', 'ALL_USERS'],
+      })
+      toast.success('Profile Updated Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
   })
 }
 

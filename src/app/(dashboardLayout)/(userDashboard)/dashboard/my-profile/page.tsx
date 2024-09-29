@@ -8,9 +8,13 @@ import {
   Divider,
   Link,
   Image,
+  Tooltip,
 } from '@nextui-org/react'
 
+import { EditIcon } from 'lucide-react'
+
 import { useGetMyProfile } from '@/src/hooks/user.hook'
+import UpdateProfile from './_components/UpdateProfile'
 
 const MyProfilePage = () => {
   const { data: userProfile, isLoading } = useGetMyProfile()
@@ -37,9 +41,10 @@ const MyProfilePage = () => {
         </div>
       </CardHeader>
       <Divider />
-      <CardBody>
+      <CardBody className='space-y-2 '>
         <p>Role: {userProfile?.role}</p>
         <p>Status: {userProfile?.status}</p>
+        <p>Mobile Number: {userProfile?.mobileNumber}</p>
       </CardBody>
       <Divider />
       <CardFooter>
@@ -63,6 +68,16 @@ const MyProfilePage = () => {
           <p>Not following anyone yet.</p>
         )}
       </CardFooter>
+      {/* <Tooltip content='Edit post'>
+        <span className='text-lg cursor-pointer text-default-400 active:opacity-50'>
+          <EditIcon> 
+      <UpdateProfile userProfile={userProfile} />
+       </EditIcon>
+        </span>
+      </Tooltip> */}
+      <div className='flex '>
+        <UpdateProfile userProfile={userProfile} />
+      </div>
     </Card>
   )
 }

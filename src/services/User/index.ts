@@ -25,6 +25,17 @@ export const getSingleUser = async (userId: string) => {
   }
 }
 
+export const updateProfile = async () => {
+  try {
+    const res = await axiosInstance.put(`/user/profile/update`)
+
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+    throw new Error('Failed to fetch data')
+  }
+}
+
 export const followUser = async (followUserId: string): Promise<any> => {
   try {
     const res = await axiosInstance.post(`user/follow/${followUserId}`)
