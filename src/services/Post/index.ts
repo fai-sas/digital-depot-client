@@ -13,3 +13,25 @@ export const createPost = async (postData: FieldValues): Promise<any> => {
     throw new Error(error)
   }
 }
+
+export const getAllPosts = async () => {
+  try {
+    const res = await axiosInstance.get('/posts')
+
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+    throw new Error('Failed to fetch data')
+  }
+}
+
+export const getSinglePost = async (postId: string) => {
+  try {
+    const res = await axiosInstance.get(`/posts/${postId}`)
+
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+    throw new Error('Failed to fetch data')
+  }
+}
