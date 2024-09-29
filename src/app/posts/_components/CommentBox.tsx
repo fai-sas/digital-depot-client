@@ -3,7 +3,11 @@
 import FormController from '@/src/components/form/FormController'
 import FormInput from '@/src/components/form/FormInput'
 import { useUser } from '@/src/context/user.provider'
-import { useCreateComment } from '@/src/hooks/comments.hook'
+import {
+  useCreateComment,
+  useDeleteComment,
+  useGetAllComments,
+} from '@/src/hooks/comments.hook'
 import { Button } from '@nextui-org/button'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 
@@ -15,6 +19,9 @@ const CommentBox = ({ postId }: any) => {
     isPending,
     isSuccess,
   } = useCreateComment()
+
+  const { data, isLoading, isError } = useGetAllComments()
+  const comments = data?.data || []
 
   const onSubmit: SubmitHandler<FieldValues> = (commentData) => {
     commentData.post = postId

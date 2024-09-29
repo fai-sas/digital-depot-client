@@ -2,7 +2,7 @@ import { Button } from '@nextui-org/button'
 
 import PostTable from './components/PostTable'
 
-import CreatePostModal from '@/src/components/modals/ClaimRequestModal'
+import CreatePostModal from '@/src/components/modals/CreatePostModal'
 
 const PostManagementPage = () => {
   return (

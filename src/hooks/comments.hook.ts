@@ -4,8 +4,10 @@ import toast from 'react-hot-toast'
 
 import {
   createComment,
+  deleteComment,
   getAllComments,
   getSingleComment,
+  updateComment,
 } from '../services/Comments'
 
 export const useCreateComment = () => {
@@ -35,5 +37,49 @@ export const useGetSingleComment = (commentId: string) => {
   return useQuery({
     queryKey: ['SINGLE_COMMENT', commentId],
     queryFn: async () => await getSingleComment(commentId),
+  })
+}
+
+export const useUpdateComment = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['UPDATE_COMMENT'],
+    mutationFn: async ({
+      commentId,
+      commentData,
+    }: {
+      commentId: string
+      commentData: any
+    }) => {
+      return await updateComment(commentId, commentData)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['ALL_COMMENTS', 'SINGLE_COMMENT'],
+      })
+      toast.success('Comment Updated Successfully')
+    },
+    onError: (error: any) => {
+      toast.error(error?.message)
+    },
+  })
+}
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: ['DELETE_COMMENT'],
+    mutationFn: async (commentId: string) => await deleteComment(commentId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['ALL_COMMENTS'],
+      })
+      toast.success('Comment Deleted Successfully')
+    },
+    onError: (error) => {
+      toast.error(error?.message)
+    },
   })
 }

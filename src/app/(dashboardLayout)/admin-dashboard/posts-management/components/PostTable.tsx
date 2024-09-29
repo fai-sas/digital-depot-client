@@ -25,7 +25,7 @@ const columns = [
 ]
 
 export default function AllPosts() {
-  const { data, isLoading, isError } = useGetAllPosts() // Fetching post data from the API
+  const { data, isLoading, isError } = useGetAllPosts()
   const posts = data?.data || []
 
   const { mutate: deletePost, isPending: deletePending } = useDeletePost()

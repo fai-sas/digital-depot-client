@@ -1,7 +1,10 @@
-import { Divider } from '@nextui-org/divider'
+'use client'
 
-import { useGetAllComments } from '@/src/hooks/comments.hook'
+import { Divider } from '@nextui-org/divider'
+import { useDeleteComment, useGetAllComments } from '@/src/hooks/comments.hook'
 import { User } from '@nextui-org/user'
+import { Button } from '@nextui-org/button'
+import UpdateComment from './UpdateComment'
 
 const Comments = ({ postId }: any) => {
   const { data, isLoading } = useGetAllComments()
@@ -11,6 +14,13 @@ const Comments = ({ postId }: any) => {
   const allComments = comments.filter(
     (comment: { post: any }) => comment?.post === postId
   )
+
+  const { mutate: handleDeleteComment } = useDeleteComment()
+
+  // Updated handleDelete function to accept comment ID
+  const handleDelete = (commentId: string) => {
+    handleDeleteComment(commentId)
+  }
 
   if (isLoading) {
     return <p>Loading comments...</p>
@@ -32,8 +42,17 @@ const Comments = ({ postId }: any) => {
               isFocusable={true}
               name={comment?.user?.name}
             />
-
             <p>{comment?.comment}</p>
+            {/* Pass the specific comment ID to the delete handler */}
+            <Button>
+              <UpdateComment commentId={comment?._id} postId={postId} />
+            </Button>
+            <h1
+              className='cursor-pointer'
+              onClick={() => handleDelete(comment?._id)} // Pass comment._id to the handler
+            >
+              Delete Comment
+            </h1>
           </div>
         ))
       ) : (

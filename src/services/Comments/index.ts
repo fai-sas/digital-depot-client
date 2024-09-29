@@ -35,3 +35,33 @@ export const getSingleComment = async (commentId: string) => {
     throw new Error('Failed to fetch data')
   }
 }
+
+export const updateComment = async (
+  commentId: string,
+  commentData: any
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.put(
+      `/comments/update/${commentId}`,
+      commentData
+    )
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || 'Error while updating comment'
+    )
+  }
+}
+
+export const deleteComment = async (commentId: string): Promise<any> => {
+  try {
+    const res = await axiosInstance.delete(`/comments/${commentId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || 'Error while deleting comment'
+    )
+  }
+}
