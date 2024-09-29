@@ -1,11 +1,24 @@
+/* eslint-disable unused-imports/no-unused-imports */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from 'next/image'
 import DOMPurify from 'dompurify'
 import { User } from '@nextui-org/user'
 import moment from 'moment'
+import CommentBox from './CommentBox'
+import { Divider } from '@nextui-org/divider'
+import Comments from './Comments'
 
-const SinglePost = ({ post }) => {
-  const { title, description, images, category, rating, comments, createdAt } =
-    post || {}
+const SinglePost = ({ post }: any) => {
+  const {
+    _id,
+    title,
+    description,
+    images,
+    category,
+    rating,
+    comments,
+    createdAt,
+  } = post || {}
 
   const sanitizedDescription = DOMPurify.sanitize(description)
 
@@ -18,7 +31,7 @@ const SinglePost = ({ post }) => {
         isFocusable={true}
         name={post?.postedBy?.name}
       />
-      {/* <p>Published on {moment(createdAt).format('D MMMM  YYYY')}</p> */}
+      <p>Published on {moment(createdAt).format('D MMMM  YYYY')}</p>
       <div className='pb-4 border-b border-default-200'>
         <Image
           alt='Card background'
@@ -35,6 +48,13 @@ const SinglePost = ({ post }) => {
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }} // Render sanitized HTML
         />
       </div>
+      <Divider />
+
+      <Comments postId={_id} />
+
+      <Divider />
+
+      <CommentBox postId={_id} />
       <p className='py-4'>{comments}</p>
     </>
   )
