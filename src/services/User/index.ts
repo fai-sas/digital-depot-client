@@ -37,14 +37,17 @@ export const getActivities = async () => {
   }
 }
 
-export const updateProfile = async () => {
+export const updateProfile = async (userId, profileData) => {
   try {
-    const res = await axiosInstance.put(`/user/profile/update`)
+    const res = await axiosInstance.put(
+      `/user/profile/update/${userId}`,
+      profileData
+    )
 
     return res.data
   } catch (error) {
-    console.error('Failed to fetch data:', error)
-    throw new Error('Failed to fetch data')
+    console.error('Failed to update profile:', error)
+    throw new Error('Failed to update profile')
   }
 }
 

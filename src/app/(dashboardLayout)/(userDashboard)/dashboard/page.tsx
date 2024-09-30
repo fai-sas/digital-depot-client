@@ -1,9 +1,12 @@
 'use client'
 
-import { useUser } from '@/src/context/user.provider'
 import { User } from '@nextui-org/user'
-import { Card, CardHeader, CardBody, Image, Chip } from '@nextui-org/react'
-import { useGetAllPosts } from '@/src/hooks/post.hook'
+import {
+  Card,
+  CardHeader,
+  Chip,
+  Badge,
+} from '@nextui-org/react'
 import {
   Eye,
   Forward,
@@ -12,6 +15,9 @@ import {
   ThumbsDown,
   ThumbsUp,
 } from 'lucide-react'
+
+import { useGetAllPosts } from '@/src/hooks/post.hook'
+import { useUser } from '@/src/context/user.provider'
 import { useGetAllComments } from '@/src/hooks/comments.hook'
 
 const DashboardPage = () => {
@@ -52,7 +58,13 @@ const DashboardPage = () => {
           isFocusable={true}
           name=''
         />
-        <h1 className=''>{user?.name}</h1>
+        {user?.isVerified ? (
+          <Badge color='secondary' content='Verified'>
+            <h1>{user?.name}</h1>
+          </Badge>
+        ) : (
+          <h1>{user?.name}</h1>
+        )}
       </section>
 
       <article className='grid grid-cols-1 gap-4 p-8 md:grid-cols-3'>

@@ -3,11 +3,10 @@
 import {
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   Divider,
   Image,
 } from '@nextui-org/react'
+
 import { useGetMyProfile } from '@/src/hooks/user.hook'
 
 const MyFollowersPage = () => {

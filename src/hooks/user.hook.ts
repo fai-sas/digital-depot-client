@@ -49,7 +49,8 @@ export const useUpdateMyProfile = () => {
 
   return useMutation({
     mutationKey: ['UPDATE_PROFILE'],
-    mutationFn: async () => await updateProfile(),
+    mutationFn: async ({ userId, profileData }) =>
+      await updateProfile(userId, profileData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['MY_PROFILE', 'SINGLE_USER', 'ALL_USERS'],
@@ -61,6 +62,40 @@ export const useUpdateMyProfile = () => {
     },
   })
 }
+
+// export const useUpdateMyProfile = () => {
+//   const queryClient = useQueryClient()
+
+//   return useMutation({
+//     mutationKey: ['UPDATE_PROFILE'],
+//     mutationFn: async () => await updateProfile(),
+//     onSuccess: async () => {
+//       // Refresh token after profile update
+//       try {
+//         const res = await getNewAccessToken()
+//         const accessToken = res?.data?.accessToken
+
+//         if (accessToken) {
+//           cookies().set('accessToken', accessToken) // Update token in cookies
+
+//           axiosInstance.defaults.headers.common['Authorization'] = accessToken // Update token in axios instance
+//         }
+//       } catch (error) {
+//         console.error('Error refreshing token:', error)
+//       }
+
+//       // Invalidate and refetch user-related queries
+//       queryClient.invalidateQueries({
+//         queryKey: ['MY_PROFILE', 'SINGLE_USER', 'ALL_USERS'],
+//       })
+
+//       toast.success('Profile Updated Successfully')
+//     },
+//     onError: (error) => {
+//       toast.error(error?.message)
+//     },
+//   })
+// }
 
 export const useFollowUser = () => {
   const queryClient = useQueryClient()

@@ -3,17 +3,22 @@
 import {
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   Divider,
   Image,
   Chip,
+  Badge,
 } from '@nextui-org/react'
+import {
+  FileQuestion,
+  Phone,
+  Radiation,
+  Receipt,
+  UserRoundCog,
+} from 'lucide-react'
 
 import UpdateProfile from './_components/UpdateProfile'
 
 import { useGetMyProfile } from '@/src/hooks/user.hook'
-import { Phone, Radiation, Receipt, UserRoundCog } from 'lucide-react'
 
 const MyProfilePage = () => {
   const { data: userProfile, isLoading } = useGetMyProfile()
@@ -35,7 +40,14 @@ const MyProfilePage = () => {
           />
 
           <div className='flex flex-col'>
-            <p className='text-md'>{userProfile?.name}</p>
+            {userProfile?.isVerified ? (
+              <Badge color='secondary' content='Verified'>
+                <h1>{userProfile?.name}</h1>
+              </Badge>
+            ) : (
+              <h1>{userProfile?.name}</h1>
+            )}
+
             <p className='text-small text-default-500'>{userProfile?.email}</p>
           </div>
         </CardHeader>
@@ -58,6 +70,18 @@ const MyProfilePage = () => {
               <p className='font-bold uppercase text-tiny'>Profile Type</p>
               <Chip className='font-bold text-large' color='secondary'>
                 {userProfile?.userType}
+              </Chip>
+            </CardHeader>
+          </Card>
+
+          <Card className='py-4'>
+            <CardHeader className='flex-col items-center justify-center px-4 pt-2 pb-0 space-y-4'>
+              <FileQuestion />
+              <p className='font-bold uppercase text-tiny'>
+                Verification Status
+              </p>
+              <Chip className='font-bold text-large' color='danger'>
+                {userProfile?.isVerified ? 'Verified' : 'Unverified'}
               </Chip>
             </CardHeader>
           </Card>

@@ -1,6 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { Button } from '@nextui-org/button'
 
 import CardSkeleton from './CardSkeleton'
 import PostCard2 from './PostCard2'
@@ -19,46 +21,53 @@ const HomePagePostCard = () => {
 
   if (!user) {
     // If no user, show only non-premium posts
-    filteredPosts = posts.filter((post) => !post.isPremium)
+    filteredPosts = posts?.filter((post) => !post.isPremium)
   } else if (user?.userType === 'BASIC') {
     // If basic user, show only non-premium posts
-    filteredPosts = posts.filter((post) => !post.isPremium)
+    filteredPosts = posts?.filter((post) => !post.isPremium)
   } else if (user?.userType === 'PREMIUM') {
     // If premium user, show all posts
     filteredPosts = posts
   }
 
   return (
-    <section className='py-8'>
-      <h1 className='mb-8 text-3xl font-bold text-center text-purple-800'>
-        Recent Posts
-      </h1>
+    <>
+      <section className='py-8'>
+        <h1 className='mb-8 text-3xl font-bold text-center text-purple-800'>
+          Recent Posts
+        </h1>
 
-      {/* Loading state */}
-      {isLoading ? (
-        <div className='flex items-center justify-center w-full min-h-screen'>
-          <CardSkeleton />
-        </div>
-      ) : filteredPosts.length > 0 ? (
-        <motion.div
-          layout
-          animate={{ opacity: 1 }}
-          className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'
-          initial={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {filteredPosts.map((post: TPost) => (
-            <motion.div key={post._id} layout>
-              <PostCard2 post={post} />
-            </motion.div>
-          ))}
-        </motion.div>
-      ) : (
-        <div className='flex items-center justify-center w-full min-h-screen'>
-          <h1 className='text-4xl text-gray-500'>No Posts Found!</h1>
-        </div>
-      )}
-    </section>
+        {/* Loading state */}
+        {isLoading ? (
+          <div className='flex items-center justify-center w-full min-h-screen'>
+            <CardSkeleton />
+          </div>
+        ) : filteredPosts?.length > 0 ? (
+          <motion.div
+            layout
+            animate={{ opacity: 1 }}
+            className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {filteredPosts?.map((post: TPost) => (
+              <motion.div key={post._id} layout>
+                <PostCard2 post={post} />
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <div className='flex items-center justify-center w-full min-h-screen'>
+            <h1 className='text-4xl text-gray-500'>No Posts Found!</h1>
+          </div>
+        )}
+      </section>
+      <div className='mb-8 text-center '>
+        <Link href='/posts'>
+          <Button color='secondary'>View More</Button>
+        </Link>
+      </div>
+    </>
   )
 }
 

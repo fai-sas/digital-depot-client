@@ -55,7 +55,9 @@ export default function CtaSection() {
 
         {/* Right Side: Text and CTA */}
         <div className='flex-1 text-center md:text-left'>
-          <h2 className='mb-4 text-4xl font-bold'>Unlock Premium Content</h2>
+          <h2 className='mb-4 text-4xl font-bold leading-normal'>
+            Get Verified and Unlock Premium Content
+          </h2>
           <p className='mb-6 text-lg leading-relaxed'>
             Gain access to exclusive tutorials, tips, and resources by becoming
             a premium member for $20/month. Share your knowledge with the

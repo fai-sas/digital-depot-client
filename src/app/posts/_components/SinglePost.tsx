@@ -52,9 +52,19 @@ const SinglePost = ({ post }: any) => {
     useUnFollowUser()
 
   const followingList = user?.following || []
+
+  // const isFollowing = followingList.some(
+  //   (userId: string) => userId === postedByUser
+  // )
+
   const isFollowing = followingList.some(
-    (userId: string) => userId === postedByUser
+    (followingUser: any) => followingUser._id === postedByUser // Compare using the _id property
   )
+
+  console.log({ postedByUser })
+  console.log('FOLLOWINGLIST:', followingList)
+  console.log('USER:', user)
+  console.log('ISFOLLOWING:', isFollowing)
 
   const postRef = useRef<HTMLDivElement>(null) // Create a reference for the post section
 

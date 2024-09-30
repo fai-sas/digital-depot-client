@@ -63,6 +63,8 @@ export const getCurrentUser = async () => {
       isVerified: decodedToken.isVerified,
       totalCost: decodedToken.totalCost,
       paymentStatus: decodedToken.paymentStatus,
+      isDeleted: decodedToken.isDeleted,
+      isBlocked: decodedToken.isBlocked,
     }
   }
 
@@ -73,6 +75,8 @@ export const getNewAccessToken = async () => {
   try {
     const refreshToken = cookies().get('refreshToken')?.value
 
+    console.log('REFRESH_TOKEN:', refreshToken)
+
     const res = await axiosInstance({
       url: '/auth/refresh-token',
       method: 'POST',
@@ -81,6 +85,8 @@ export const getNewAccessToken = async () => {
         cookies: `refreshToken=${refreshToken}`,
       },
     })
+
+    console.log('RES_DATA:', res.data)
 
     return res.data
   } catch (error) {

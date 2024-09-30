@@ -21,19 +21,28 @@ export const siteConfig = {
       label: 'About',
       href: '/about',
     },
-    // {
-    //   label: 'Login',
-    //   href: '/login',
-    // },
-    // {
-    //   label: 'Register',
-    //   href: '/register',
-    // },
   ],
   navMenuItems: [
     {
       label: 'Dashboard',
-      href: '/admin-dashboard',
+      href: '/dashboard',
+    },
+    {
+      label: 'Home',
+      href: '/',
+    },
+    {
+      label: 'Posts',
+      href: '/posts',
+    },
+    {
+      label: 'Contact',
+      href: '/contact',
+    },
+
+    {
+      label: 'About',
+      href: '/about',
     },
     {
       label: 'Logout',

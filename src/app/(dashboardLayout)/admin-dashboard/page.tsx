@@ -3,17 +3,15 @@
 import {
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   Divider,
   Image,
   Chip,
 } from '@nextui-org/react'
-
 import { Phone, Radiation, Receipt, UserRoundCog } from 'lucide-react'
 
-import { useGetMyProfile } from '@/src/hooks/user.hook'
 import UpdateProfile from '../(userDashboard)/dashboard/my-profile/_components/UpdateProfile'
+
+import { useGetMyProfile } from '@/src/hooks/user.hook'
 
 const AdminDashboardPage = () => {
   const { data: userProfile, isLoading } = useGetMyProfile()

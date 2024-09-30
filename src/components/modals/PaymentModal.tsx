@@ -1,21 +1,24 @@
 import { Button } from '@nextui-org/button'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 import FormController from '../form/FormController'
 
 import ModalController from './ModalController'
 
-import { UseMakePaymentForPremiumUser } from '@/src/hooks/user.hook'
 import { useUser } from '@/src/context/user.provider'
+import { UseMakePaymentForPremiumUser } from '@/src/hooks/user.hook'
 import { logout } from '@/src/services/Auth'
 
-const PaymentModal = () => {
-  const { user } = useUser()
 
+
+
+const PaymentModal = () => {
+  const { user, setUser } = useUser()
   const { mutate: handleMakePayment, isPending } =
     UseMakePaymentForPremiumUser()
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async () => {
     const paymentData = {
       user: {
         userId: user?._id,
@@ -27,13 +30,22 @@ const PaymentModal = () => {
     }
 
     handleMakePayment(paymentData, {
-      onSuccess: (res) => {
-        logout()
+      onSuccess: async (res) => {
         if (res?.success && res?.data?.payment_url) {
+          // Redirect to payment URL
           window.location.href = res.data.payment_url
         } else {
           console.error('Order creation failed:', res?.message)
         }
+        logout()
+        toast.success('Please re-login to get premium contents')
+
+        // // 1. Refresh the access token after payment
+        // await getNewAccessToken()
+
+        // // 2. Refetch the updated user details after refreshing token
+        // const updatedUser = await getCurrentUser()
+        // setUser(updatedUser) // Update the user context with the new data
       },
       onError: (error) => {
         console.error('Payment failed:', error)
@@ -44,7 +56,7 @@ const PaymentModal = () => {
   return (
     <ModalController
       buttonClassName='flex-1 text-xl font-bold'
-      buttonText='Unlock for $20'
+      buttonText='Unlock for $20/month'
       color='primary'
       title='Make Payment'
     >
