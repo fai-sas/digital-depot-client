@@ -22,12 +22,27 @@ import NavbarDropdown from './NavbarDropdown'
 import { siteConfig } from '@/src/config/site'
 import { ThemeSwitch } from '@/src/components/theme-switch'
 
-
-
-
 export const Navbar = () => {
   const router = useRouter()
   const { user } = useUser()
+
+  // Default public or shared menu items can be added here
+  const sharedMenuItems = siteConfig?.navMenuItems || []
+
+  // Select the appropriate nav menu items based on the user's role
+  let roleBasedMenuItems = siteConfig.navMenuItems.public
+
+  if (user?.role === 'ADMIN') {
+    roleBasedMenuItems = [
+      ...roleBasedMenuItems,
+      ...siteConfig.navMenuItems.admin,
+    ]
+  } else if (user?.role === 'USER') {
+    roleBasedMenuItems = [
+      ...roleBasedMenuItems,
+      ...siteConfig.navMenuItems.user,
+    ]
+  }
 
   return (
     <NextUINavbar maxWidth='xl' position='sticky'>
@@ -79,7 +94,7 @@ export const Navbar = () => {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu>
+      {/* <NavbarMenu>
         <div className='flex flex-col gap-2 mx-4 mt-2'>
           {siteConfig.navMenuItems?.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
@@ -92,6 +107,28 @@ export const Navbar = () => {
                       : 'foreground'
                 }
                 href={item?.href}
+                size='lg'
+              >
+                {item.label}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </div>
+      </NavbarMenu> */}
+
+      <NavbarMenu>
+        <div className='flex flex-col gap-2 mx-4 mt-2'>
+          {roleBasedMenuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.label}-${index}`}>
+              <Link
+                color={
+                  index === 2
+                    ? 'primary'
+                    : index === roleBasedMenuItems.length - 1
+                      ? 'danger'
+                      : 'foreground'
+                }
+                href={item.href}
                 size='lg'
               >
                 {item.label}

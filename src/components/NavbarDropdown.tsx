@@ -12,7 +12,8 @@ import { User } from '@nextui-org/react'
 import { logout } from '../services/Auth'
 import { protectedRoutes } from '../utils/protectedRoutes'
 
-import { useUser } from '@/src/context/user.provider'
+import { useGetMe } from '../hooks/user.hook'
+import { useUser } from '../context/user.provider'
 
 export default function NavbarDropdown() {
   const router = useRouter()
@@ -32,37 +33,80 @@ export default function NavbarDropdown() {
     router.push(pathname)
   }
 
+  const adminItems = [
+    <DropdownItem
+      key='admin-dashboard'
+      onClick={() => handleNavigation('/admin-dashboard')}
+    >
+      Dashboard
+    </DropdownItem>,
+    <DropdownItem
+      key='posts-management'
+      onClick={() => handleNavigation('/admin-dashboard/posts-management')}
+    >
+      Post Management
+    </DropdownItem>,
+    <DropdownItem
+      key='user-management'
+      onClick={() => handleNavigation('/admin-dashboard/user-management')}
+    >
+      Manage Users
+    </DropdownItem>,
+    <DropdownItem
+      key='activity-log'
+      onClick={() => handleNavigation('/admin-dashboard/activity-log')}
+    >
+      Activity Log
+    </DropdownItem>,
+  ]
+
+  const userItems = [
+    <DropdownItem
+      key='dashboard'
+      onClick={() => handleNavigation('/dashboard')}
+    >
+      Dashboard
+    </DropdownItem>,
+    <DropdownItem
+      key='my-posts'
+      onClick={() => handleNavigation('/dashboard/my-post')}
+    >
+      My Posts
+    </DropdownItem>,
+    <DropdownItem
+      key='follow-details'
+      onClick={() => handleNavigation('/dashboard/follow-details')}
+    >
+      Follow Details
+    </DropdownItem>,
+    <DropdownItem
+      key='my-profile'
+      onClick={() => handleNavigation('/dashboard/my-profile')}
+    >
+      My Profile
+    </DropdownItem>,
+  ]
+
   if (currentUser) {
     return (
       <Dropdown>
         <DropdownTrigger>
-          {/* <Avatar className='cursor-pointer' src={currentUser?.profilePhoto} /> */}
           <User
             avatarProps={{
-              src: `${currentUser?.profilePhoto}`,
+              src: currentUser?.profilePhoto || '/default-avatar.png',
             }}
             isFocusable={true}
             name={currentUser?.name}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label='Static Actions'>
-          {currentUser?.role === 'ADMIN' && (
-            <DropdownItem onClick={() => handleNavigation('/admin-dashboard')}>
-              Dashboard
-            </DropdownItem>
-          )}
-
-          {currentUser?.role === 'USER' && (
-            <DropdownItem onClick={() => handleNavigation('/dashboard')}>
-              Dashboard
-            </DropdownItem>
-          )}
-
+          {currentUser?.role === 'ADMIN' && adminItems}
+          {currentUser?.role === 'USER' && userItems}
           <DropdownItem
             key='delete'
             className='text-danger'
             color='danger'
-            onClick={() => handleLogout()}
+            onClick={handleLogout}
           >
             Logout
           </DropdownItem>
@@ -70,4 +114,6 @@ export default function NavbarDropdown() {
       </Dropdown>
     )
   }
+
+  return null
 }
