@@ -17,7 +17,7 @@ import { useDownVote, useUpVote } from '@/src/hooks/post.hook'
 import { TPost } from '@/src/types'
 import { useUser } from '@/src/context/user.provider'
 
-export default function PostCard2({ post }: TPost) {
+export default function PostCard({ post }: TPost) {
   const { user } = useUser()
   const { mutate: upVotePost, isPending: upVotePending } = useUpVote()
   const { mutate: downVotePost, isPending: downVotePending } = useDownVote()
