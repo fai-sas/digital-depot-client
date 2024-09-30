@@ -25,8 +25,7 @@ import { Chip } from '@nextui-org/chip'
 import Comments from './Comments'
 import CommentBox from './CommentBox'
 
-import { useFollowUser, useUnFollowUser } from '@/src/hooks/user.hook'
-import { useUser } from '@/src/context/user.provider'
+import { useFollowUser, useGetMe, useUnFollowUser } from '@/src/hooks/user.hook'
 
 const SinglePost = ({ post }: any) => {
   const {
@@ -44,7 +43,9 @@ const SinglePost = ({ post }: any) => {
   const sanitizedDescription = DOMPurify.sanitize(description)
   const postedByUser = postedBy?._id
 
-  const { user } = useUser() // Get current logged-in user
+  const { data } = useGetMe()
+
+  const user = data?.data
 
   const { mutate: handleFollowUser, isPending: followUserPending } =
     useFollowUser()
@@ -53,18 +54,14 @@ const SinglePost = ({ post }: any) => {
 
   const followingList = user?.following || []
 
-  // const isFollowing = followingList.some(
-  //   (userId: string) => userId === postedByUser
-  // )
-
   const isFollowing = followingList.some(
-    (followingUser: any) => followingUser._id === postedByUser // Compare using the _id property
+    (followingUser: any) => followingUser._id === postedByUser
   )
 
-  console.log({ postedByUser })
-  console.log('FOLLOWINGLIST:', followingList)
-  console.log('USER:', user)
-  console.log('ISFOLLOWING:', isFollowing)
+  // console.log({ postedByUser })
+  // console.log('FOLLOWINGLIST:', followingList)
+  // console.log('USER:', user)
+  // console.log('ISFOLLOWING:', isFollowing)
 
   const postRef = useRef<HTMLDivElement>(null) // Create a reference for the post section
 

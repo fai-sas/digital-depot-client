@@ -1,12 +1,7 @@
 'use client'
 
 import { User } from '@nextui-org/user'
-import {
-  Card,
-  CardHeader,
-  Chip,
-  Badge,
-} from '@nextui-org/react'
+import { Card, CardHeader, Chip, Badge } from '@nextui-org/react'
 import {
   Eye,
   Forward,
@@ -17,13 +12,16 @@ import {
 } from 'lucide-react'
 
 import { useGetAllPosts } from '@/src/hooks/post.hook'
-import { useUser } from '@/src/context/user.provider'
+
 import { useGetAllComments } from '@/src/hooks/comments.hook'
+import { useGetMe } from '@/src/hooks/user.hook'
 
 const DashboardPage = () => {
-  const { user } = useUser()
-
   const { data } = useGetAllPosts()
+
+  const { data: userData } = useGetMe()
+
+  const user = userData?.data
 
   const { data: commentData } = useGetAllComments()
 

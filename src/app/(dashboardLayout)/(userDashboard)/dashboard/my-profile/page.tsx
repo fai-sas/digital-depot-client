@@ -18,10 +18,12 @@ import {
 
 import UpdateProfile from './_components/UpdateProfile'
 
-import { useGetMyProfile } from '@/src/hooks/user.hook'
+import { useGetMe } from '@/src/hooks/user.hook'
 
 const MyProfilePage = () => {
-  const { data: userProfile, isLoading } = useGetMyProfile()
+  const { data, isLoading } = useGetMe()
+
+  const userProfile = data?.data
 
   if (isLoading) {
     return <div className='p-8 font-bold'>Loading...</div>

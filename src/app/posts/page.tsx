@@ -2,7 +2,6 @@ import Search from './_components/Search'
 import PostCard from './_components/PostCard'
 
 import axiosInstance from '@/src/lib/AxiosInstance'
-import { getCurrentUser } from '@/src/services/Auth'
 
 // This is a server component
 const AllPosts = async ({ searchParams }: { searchParams: any }) => {
@@ -16,8 +15,15 @@ const AllPosts = async ({ searchParams }: { searchParams: any }) => {
     },
   })
 
-  // Fetch user data (assume this fetches user info from the session or API)
-  const user = await getCurrentUser()
+  // Fetch user data
+  let user = null
+  try {
+    const res = await axiosInstance.get(`/auth/me`)
+
+    user = res?.data?.data
+  } catch (error) {
+    console.error('Failed to fetch user data:', error)
+  }
 
   // Filter posts based on user type
   let filteredPosts = []
@@ -25,10 +31,10 @@ const AllPosts = async ({ searchParams }: { searchParams: any }) => {
   if (!user) {
     // No user: Show only non-premium posts
     filteredPosts = data?.data?.filter((post: any) => !post.isPremium)
-  } else if (user?.userType === 'BASIC') {
+  } else if (user.userType === 'BASIC') {
     // Basic user: Show only non-premium posts
     filteredPosts = data?.data?.filter((post: any) => !post.isPremium)
-  } else if (user?.userType === 'PREMIUM') {
+  } else if (user.userType === 'PREMIUM') {
     // Premium user: Show all posts
     filteredPosts = data?.data
   }

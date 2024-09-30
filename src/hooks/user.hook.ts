@@ -8,6 +8,7 @@ import {
   followUser,
   getActivities,
   getAllUsers,
+  getMe,
   getSingleUser,
   makeAdmin,
   makePaymentForPremiumUser,
@@ -41,6 +42,15 @@ export const useGetMyProfile = () => {
   return useQuery({
     queryKey: ['MY_PROFILE'],
     queryFn: async () => await getCurrentUser(),
+    refetchOnWindowFocus: true,
+    staleTime: 0,
+  })
+}
+
+export const useGetMe = () => {
+  return useQuery({
+    queryKey: ['GET_ME'],
+    queryFn: async () => await getMe(),
   })
 }
 
@@ -53,7 +63,7 @@ export const useUpdateMyProfile = () => {
       await updateProfile(userId, profileData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['MY_PROFILE', 'SINGLE_USER', 'ALL_USERS'],
+        queryKey: ['GET_ME'],
       })
       toast.success('Profile Updated Successfully')
     },
@@ -63,40 +73,6 @@ export const useUpdateMyProfile = () => {
   })
 }
 
-// export const useUpdateMyProfile = () => {
-//   const queryClient = useQueryClient()
-
-//   return useMutation({
-//     mutationKey: ['UPDATE_PROFILE'],
-//     mutationFn: async () => await updateProfile(),
-//     onSuccess: async () => {
-//       // Refresh token after profile update
-//       try {
-//         const res = await getNewAccessToken()
-//         const accessToken = res?.data?.accessToken
-
-//         if (accessToken) {
-//           cookies().set('accessToken', accessToken) // Update token in cookies
-
-//           axiosInstance.defaults.headers.common['Authorization'] = accessToken // Update token in axios instance
-//         }
-//       } catch (error) {
-//         console.error('Error refreshing token:', error)
-//       }
-
-//       // Invalidate and refetch user-related queries
-//       queryClient.invalidateQueries({
-//         queryKey: ['MY_PROFILE', 'SINGLE_USER', 'ALL_USERS'],
-//       })
-
-//       toast.success('Profile Updated Successfully')
-//     },
-//     onError: (error) => {
-//       toast.error(error?.message)
-//     },
-//   })
-// }
-
 export const useFollowUser = () => {
   const queryClient = useQueryClient()
 
@@ -104,7 +80,7 @@ export const useFollowUser = () => {
     mutationKey: ['FOLLOW_USER'],
     mutationFn: async (followUserId) => await followUser(followUserId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['ALL_USERS', 'SINGLE_USER'] })
+      queryClient.invalidateQueries({ queryKey: ['GET_ME'] })
       toast.success('User Followed Successfully')
     },
     onError: (error) => {
@@ -120,7 +96,7 @@ export const useUnFollowUser = () => {
     mutationKey: ['UNFOLLOW_USER'],
     mutationFn: async (unFollowUserId) => await unFollowUser(unFollowUserId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['ALL_USERS', 'SINGLE_USER'] })
+      queryClient.invalidateQueries({ queryKey: ['GET_ME'] })
       toast.success('User Un Followed Successfully')
     },
     onError: (error) => {
@@ -177,16 +153,16 @@ export const useDeleteUser = () => {
 }
 
 export const UseMakePaymentForPremiumUser = () => {
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
   return useMutation<any, Error, FieldValues>({
     mutationKey: ['MAKE_PAYMENT'],
     mutationFn: async (paymentData) =>
       await makePaymentForPremiumUser(paymentData),
-    // onSuccess: () => {
-    //   queryClient.invalidateQueries({ queryKey: ['ALL_USERS'] })
-    //   toast.success('Payment Made Successfully')
-    // },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['GET_ME'] })
+      // toast.success('Payment Made Successfully')
+    },
     // onError: (error) => {
     //   toast.error(error?.message)
     // },

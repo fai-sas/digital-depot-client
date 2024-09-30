@@ -77,19 +77,25 @@ export const getNewAccessToken = async () => {
 
     console.log('REFRESH_TOKEN:', refreshToken)
 
-    const res = await axiosInstance({
-      url: '/auth/refresh-token',
-      method: 'POST',
-      withCredentials: true,
-      headers: {
-        cookies: `refreshToken=${refreshToken}`,
-      },
+    if (!refreshToken) {
+      throw new Error('Refresh token not found') // Handle missing refresh token
+    }
+
+    const res = await axiosInstance.post('/auth/refresh-token', {
+      refreshToken,
     })
 
-    console.log('RES_DATA:', res.data)
+    if (res.data.success) {
+      const newAccessToken = res.data.accessToken
+      cookies().set('accessToken', newAccessToken)
 
-    return res.data
+      return newAccessToken
+    } else {
+      throw new Error('Refresh token failed') // Handle refresh token errors
+    }
   } catch (error) {
+    console.error('Error refreshing token:', error)
     throw new Error('Failed to get new access token')
+    // Handle refresh token errors (e.g., logout user)
   }
 }

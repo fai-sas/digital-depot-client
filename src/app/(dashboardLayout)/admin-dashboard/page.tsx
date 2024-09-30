@@ -1,20 +1,16 @@
 'use client'
 
-import {
-  Card,
-  CardHeader,
-  Divider,
-  Image,
-  Chip,
-} from '@nextui-org/react'
+import { Card, CardHeader, Divider, Image, Chip } from '@nextui-org/react'
 import { Phone, Radiation, Receipt, UserRoundCog } from 'lucide-react'
 
 import UpdateProfile from '../(userDashboard)/dashboard/my-profile/_components/UpdateProfile'
 
-import { useGetMyProfile } from '@/src/hooks/user.hook'
+import { useGetMe } from '@/src/hooks/user.hook'
 
 const AdminDashboardPage = () => {
-  const { data: userProfile, isLoading } = useGetMyProfile()
+  const { data, isLoading } = useGetMe()
+
+  const userProfile = data?.data
 
   if (isLoading) {
     return <div className='p-8 font-bold'>Loading...</div>

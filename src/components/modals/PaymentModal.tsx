@@ -7,14 +7,16 @@ import FormController from '../form/FormController'
 import ModalController from './ModalController'
 
 import { useUser } from '@/src/context/user.provider'
-import { UseMakePaymentForPremiumUser } from '@/src/hooks/user.hook'
+import { useGetMe, UseMakePaymentForPremiumUser } from '@/src/hooks/user.hook'
 import { logout } from '@/src/services/Auth'
 
-
-
-
 const PaymentModal = () => {
-  const { user, setUser } = useUser()
+  // const { user, setUser } = useUser()
+
+  const { data } = useGetMe()
+
+  const user = data?.data
+
   const { mutate: handleMakePayment, isPending } =
     UseMakePaymentForPremiumUser()
 
@@ -37,15 +39,9 @@ const PaymentModal = () => {
         } else {
           console.error('Order creation failed:', res?.message)
         }
-        logout()
-        toast.success('Please re-login to get premium contents')
-
-        // // 1. Refresh the access token after payment
-        // await getNewAccessToken()
-
-        // // 2. Refetch the updated user details after refreshing token
-        // const updatedUser = await getCurrentUser()
-        // setUser(updatedUser) // Update the user context with the new data
+        // logout()
+        // toast.success('Payment Made Successfully')
+        toast.success('Redirecting to Payment Page')
       },
       onError: (error) => {
         console.error('Payment failed:', error)

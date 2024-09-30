@@ -1,16 +1,13 @@
 'use client'
 
-import {
-  Card,
-  CardHeader,
-  Divider,
-  Image,
-} from '@nextui-org/react'
+import { Card, CardHeader, Divider, Image } from '@nextui-org/react'
 
-import { useGetMyProfile } from '@/src/hooks/user.hook'
+import { useGetMe } from '@/src/hooks/user.hook'
 
 const MyFollowersPage = () => {
-  const { data: userProfile, isLoading } = useGetMyProfile()
+  const { data: userData } = useGetMe()
+
+  const userProfile = userData?.data
 
   return (
     <>

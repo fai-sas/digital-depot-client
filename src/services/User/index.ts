@@ -4,6 +4,9 @@ import { FieldValues } from 'react-hook-form'
 
 import axiosInstance from '@/src/lib/AxiosInstance'
 
+import { cookies } from 'next/headers'
+import { getNewAccessToken } from '../Auth'
+
 export const getAllUsers = async () => {
   try {
     const res = await axiosInstance.get('/user')
@@ -18,6 +21,17 @@ export const getAllUsers = async () => {
 export const getSingleUser = async (userId: string) => {
   try {
     const res = await axiosInstance.get(`/user/${userId}`)
+
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+    throw new Error('Failed to fetch data')
+  }
+}
+
+export const getMe = async () => {
+  try {
+    const res = await axiosInstance.get(`/auth/me`)
 
     return res.data
   } catch (error) {

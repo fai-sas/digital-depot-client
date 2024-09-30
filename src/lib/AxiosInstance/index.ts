@@ -89,8 +89,6 @@ axiosInstance.interceptors.response.use(
       config.headers['Authorization'] = accessToken
       cookies().set('accessToken', accessToken)
 
-      console.log(accessToken)
-
       return axiosInstance(config)
     } else {
       return Promise.reject(error)

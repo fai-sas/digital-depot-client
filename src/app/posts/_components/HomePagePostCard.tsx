@@ -10,11 +10,16 @@ import PostCard2 from './PostCard2'
 import { TPost } from '@/src/types'
 import { useGetAllPosts } from '@/src/hooks/post.hook'
 import { useUser } from '@/src/context/user.provider'
+import { useGetMe } from '@/src/hooks/user.hook'
 
 const HomePagePostCard = () => {
-  const { user } = useUser()
+  // const { user } = useUser()
   const { data, isLoading } = useGetAllPosts()
   const posts = data?.data || []
+
+  const { data: userData } = useGetMe()
+
+  const user = userData?.data
 
   // Filter posts based on user status
   let filteredPosts = []
