@@ -6,7 +6,6 @@ import FormInput from '@/src/components/form/FormInput'
 import ModalController from '@/src/components/modals/ModalController'
 import { useUpdateMyProfile } from '@/src/hooks/user.hook'
 
-
 const UpdateProfile = ({ userProfile }) => {
   const defaultValues = {
     name: userProfile?.name,
@@ -22,7 +21,7 @@ const UpdateProfile = ({ userProfile }) => {
   return (
     <>
       <ModalController
-        buttonClassName=''
+        buttonClassName=' font-bold text-xl m-4'
         buttonText='Update Profile'
         title='Update Profile'
       >

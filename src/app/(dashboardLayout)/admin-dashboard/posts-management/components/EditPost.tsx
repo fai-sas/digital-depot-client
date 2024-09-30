@@ -6,6 +6,7 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@nextui-org/button'
 import { Divider } from '@nextui-org/divider'
 import React, { useState, useEffect } from 'react'
@@ -16,13 +17,17 @@ import FormInput from '@/src/components/form/FormInput'
 import FormSelect from '@/src/components/form/FormSelect'
 import { ImageUploader } from '@/src/components/ImageUploader'
 import { useUser } from '@/src/context/user.provider'
+import 'react-quill/dist/quill.snow.css'
 
 // Dynamically import ReactQuill to handle SSR
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-import 'react-quill/dist/quill.snow.css'
-
 export default function EditPost({ postId }: { postId: string }) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const redirect = searchParams.get('redirect')
+
   const [description, setDescription] = useState('')
 
   const { data } = useGetSinglePost(postId)
@@ -30,8 +35,11 @@ export default function EditPost({ postId }: { postId: string }) {
 
   const { user } = useUser()
 
-  const { mutate: handleUpdatePost, isPending: updatePostPending } =
-    useUpdatePost()
+  const {
+    mutate: handleUpdatePost,
+    isPending: updatePostPending,
+    isSuccess: updatePostSuccess,
+  } = useUpdatePost()
 
   const categoryOptions = [
     { key: 'Web', label: 'Web' },
@@ -73,6 +81,16 @@ export default function EditPost({ postId }: { postId: string }) {
       postData,
     })
   }
+
+  useEffect(() => {
+    if (!updatePostPending && updatePostSuccess) {
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        router.push('/dashboard/my-post')
+      }
+    }
+  }, [updatePostPending, updatePostSuccess])
 
   return (
     <>

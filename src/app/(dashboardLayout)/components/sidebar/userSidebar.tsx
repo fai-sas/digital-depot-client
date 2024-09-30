@@ -44,10 +44,10 @@ export const SidebarWrapper = () => {
                 title='My Posts'
               />
               <SidebarItem
-                href='/dashboard/my-followers'
+                href='/dashboard/follow-details'
                 icon={<DollarSign />}
-                isActive={pathname === '/dashboard/my-followers'}
-                title='My Followers'
+                isActive={pathname === '/dashboard/follow-details'}
+                title='Follow Details'
               />
               <SidebarItem
                 href='/dashboard/my-profile'

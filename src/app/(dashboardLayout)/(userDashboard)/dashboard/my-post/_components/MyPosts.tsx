@@ -22,7 +22,7 @@ const MyPosts = () => {
           <CardSkeleton />
         </div>
       ) : posts?.length ? (
-        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3'>
           {posts?.map((post: TPost) => (
             <MyPostCard key={post._id} post={post} />
           ))}
