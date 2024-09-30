@@ -46,12 +46,18 @@ export default function CreateBlogPost() {
     { key: 'Data Science', label: 'Data Science' },
   ]
 
+  const premiumOptions = [
+    { key: 'true', label: 'Yes' },
+    { key: 'false', label: 'No' },
+  ]
+
   const methods = useForm({
     defaultValues: {
       title: '',
       description: '',
       images: [],
       category: 'Web',
+      isPremium: false,
     },
   })
 
@@ -96,6 +102,20 @@ export default function CreateBlogPost() {
                 />
               </div>
             </div>
+
+            {/* Premium Select */}
+
+            {user?.userType === 'PREMIUM' && (
+              <div className='flex flex-wrap gap-2 py-2'>
+                <div className='flex-1 min-w-fit'>
+                  <FormSelect
+                    label='Premium Post'
+                    name='isPremium'
+                    options={premiumOptions}
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Image Uploader */}
             <div className='flex flex-wrap gap-2 py-2'>

@@ -22,6 +22,7 @@ interface IProps {
     | 'ghost'
     | undefined
   buttonClassName?: string
+  color?: string
 }
 
 const ModalController = ({
@@ -30,6 +31,7 @@ const ModalController = ({
   children,
   buttonVariant = 'light',
   buttonClassName,
+  color,
 }: IProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
@@ -37,6 +39,7 @@ const ModalController = ({
     <>
       <Button
         className={buttonClassName}
+        color={color}
         variant={buttonVariant}
         onPress={onOpen}
       >

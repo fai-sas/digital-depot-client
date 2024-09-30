@@ -5,11 +5,11 @@ import Link from 'next/link'
 
 import ModalController from './ModalController'
 
-interface IProps {
-  id: string
-}
+// interface IProps {
+//   id: string
+// }
 
-const AuthenticationModal = ({ id }: IProps) => {
+const AuthenticationModal = () => {
   return (
     <ModalController
       buttonClassName='flex-1'
@@ -20,10 +20,10 @@ const AuthenticationModal = ({ id }: IProps) => {
         You are not currently logged in. Please login first to continue.
       </div>
       <div className='flex gap-2 mt-2 mb-4'>
-        <Link className='flex-1' href={`/register?redirect=found-items/${id}`}>
+        <Link className='flex-1' href={`/register?redirect=/`}>
           <Button className='w-full'>Register</Button>
         </Link>
-        <Link className='flex-1' href={`/login?redirect=found-items/${id}`}>
+        <Link className='flex-1' href={`/login?redirect=/`}>
           <Button className='w-full'>Login</Button>
         </Link>
       </div>

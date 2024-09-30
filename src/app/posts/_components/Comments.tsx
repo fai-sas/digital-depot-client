@@ -2,9 +2,10 @@
 
 import { User } from '@nextui-org/user'
 import { Tooltip } from '@nextui-org/react'
-import { DeleteIcon, EditIcon } from 'lucide-react'
+import { DeleteIcon } from 'lucide-react'
 
 import UpdateComment from './UpdateComment'
+
 import { useDeleteComment, useGetAllComments } from '@/src/hooks/comments.hook'
 import { useUser } from '@/src/context/user.provider'
 

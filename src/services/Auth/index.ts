@@ -59,6 +59,10 @@ export const getCurrentUser = async () => {
       followers: decodedToken.followers,
       following: decodedToken.following,
       profilePhoto: decodedToken.profilePhoto,
+      userType: decodedToken.userType,
+      isVerified: decodedToken.isVerified,
+      totalCost: decodedToken.totalCost,
+      paymentStatus: decodedToken.paymentStatus,
     }
   }
 

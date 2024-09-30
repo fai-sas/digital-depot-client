@@ -13,8 +13,6 @@ import loginValidationSchema from '@/src/schemas/login.schema'
 import { useUser } from '@/src/context/user.provider'
 import Loading from '@/src/components/Loading'
 import { useUserLogin } from '@/src/hooks/auth.hook'
-import GoogleLoginButton from '@/src/components/buttons/GoogleLoginButton'
-import GithubLoginButton from '@/src/components/buttons/GithubLoginButton'
 
 const LoginPage = () => {
   const searchParams = useSearchParams()
@@ -66,8 +64,8 @@ const LoginPage = () => {
               Login
             </Button>
           </FormController>
-          <GoogleLoginButton />
-          <GithubLoginButton />
+          {/* <GoogleLoginButton />
+          <GithubLoginButton /> */}
           <div className='text-center'>
             Don&lsquo;t have account ? <Link href={'/register'}>Register</Link>
           </div>

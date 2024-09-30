@@ -4,9 +4,11 @@ import { Input } from '@nextui-org/input'
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import useDebounce from '@/src/hooks/debounce.hook'
 import { SearchIcon } from 'lucide-react'
+
 import Filtering from './Filtering'
+
+import useDebounce from '@/src/hooks/debounce.hook'
 
 const Search = () => {
   const { register, watch, reset } = useForm()

@@ -40,6 +40,7 @@ const MyProfilePage = () => {
       <Divider />
       <CardBody className='space-y-2 '>
         <p>Role: {userProfile?.role}</p>
+        <p>Profile Type: {userProfile?.userType}</p>
         <p>Status: {userProfile?.status}</p>
         <p>Mobile Number: {userProfile?.mobileNumber}</p>
       </CardBody>

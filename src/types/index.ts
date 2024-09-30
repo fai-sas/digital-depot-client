@@ -34,6 +34,12 @@ export interface IUser {
   profilePhoto: string
   createdAt?: string
   updatedAt?: string
+  userType: 'BASIC' | 'PREMIUM'
+  isVerified: boolean
+  totalCost: number
+  paymentStatus?: string
+  isDeleted: boolean
+  isBlocked: boolean
   __v?: number
 }
 

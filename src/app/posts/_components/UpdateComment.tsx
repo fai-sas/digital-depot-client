@@ -1,5 +1,6 @@
 import { Button } from '@nextui-org/button'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
+import { EditIcon } from 'lucide-react'
 
 import FormController from '@/src/components/form/FormController'
 import FormInput from '@/src/components/form/FormInput'
@@ -9,7 +10,6 @@ import {
   useGetSingleComment,
   useUpdateComment,
 } from '@/src/hooks/comments.hook'
-import { EditIcon } from 'lucide-react'
 
 const UpdateComment = ({ commentId, postId }) => {
   const { user } = useUser()
@@ -30,6 +30,7 @@ const UpdateComment = ({ commentId, postId }) => {
   const onSubmit: SubmitHandler<FieldValues> = (commentData) => {
     if (!commentId) {
       console.error('Comment ID is undefined!')
+
       return
     }
 

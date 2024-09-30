@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import { FieldValues } from 'react-hook-form'
 
 import {
   blockUser,
@@ -9,6 +10,7 @@ import {
   getAllUsers,
   getSingleUser,
   makeAdmin,
+  makePaymentForPremiumUser,
   unFollowUser,
   updateProfile,
 } from '../services/User'
@@ -136,5 +138,22 @@ export const useDeleteUser = () => {
     onError: (error) => {
       toast.error(error?.message)
     },
+  })
+}
+
+export const UseMakePaymentForPremiumUser = () => {
+  // const queryClient = useQueryClient()
+
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ['MAKE_PAYMENT'],
+    mutationFn: async (paymentData) =>
+      await makePaymentForPremiumUser(paymentData),
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ['ALL_USERS'] })
+    //   toast.success('Payment Made Successfully')
+    // },
+    // onError: (error) => {
+    //   toast.error(error?.message)
+    // },
   })
 }

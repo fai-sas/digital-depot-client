@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@nextui-org/button'
 import { RotateCw } from 'lucide-react'
+
 import { useGetAllPosts } from '@/src/hooks/post.hook'
 
 const Filtering = ({
@@ -20,6 +21,7 @@ const Filtering = ({
     const params = new URLSearchParams(searchParams.toString())
 
     const [key, value] = category.split('=')
+
     params.set(key, value)
 
     router.push(`/posts?${params.toString()}`)

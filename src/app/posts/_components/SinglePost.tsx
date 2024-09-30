@@ -20,6 +20,7 @@ import {
   LinkedinIcon,
   WhatsappIcon,
 } from 'react-share'
+import { Chip } from '@nextui-org/chip'
 
 import Comments from './Comments'
 import CommentBox from './CommentBox'
@@ -34,7 +35,7 @@ const SinglePost = ({ post }: any) => {
     description,
     images,
     category,
-    rating,
+    ratings,
     comments,
     createdAt,
     postedBy,
@@ -114,19 +115,25 @@ const SinglePost = ({ post }: any) => {
           name={post?.postedBy?.name}
         />
 
-        {!isFollowing ? (
-          <Button disabled={followUserPending} onClick={handleFollow}>
-            Follow User
-          </Button>
-        ) : (
-          <Button
-            disabled={UnFollowUserPending}
-            variant='bordered'
-            onClick={handleUnFollow}
-          >
-            Unfollow User
-          </Button>
-        )}
+        {user &&
+          (!isFollowing ? (
+            <Button
+              color='secondary'
+              disabled={followUserPending}
+              onClick={handleFollow}
+            >
+              Follow
+            </Button>
+          ) : (
+            <Button
+              color='warning'
+              disabled={UnFollowUserPending}
+              variant='bordered'
+              onClick={handleUnFollow}
+            >
+              Unfollow
+            </Button>
+          ))}
       </section>
 
       <small className='py-2'>
@@ -142,9 +149,11 @@ const SinglePost = ({ post }: any) => {
             src={images?.[0]}
             width={1000}
           />
-          <p className='py-4'>{category}</p>
-          <p className='py-4'>{rating}</p>
-          <p className='py-4'>{title}</p>
+          <div className='py-4'>
+            <Chip color='warning'>{category}</Chip>
+          </div>
+          <p className='py-4 '>{ratings}</p>
+          <p className='py-4 text-xl font-bold'>{title}</p>
 
           <div
             dangerouslySetInnerHTML={{ __html: sanitizedDescription }} // Render sanitized HTML

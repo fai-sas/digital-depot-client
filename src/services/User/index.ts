@@ -1,5 +1,7 @@
 'use server'
 
+import { FieldValues } from 'react-hook-form'
+
 import axiosInstance from '@/src/lib/AxiosInstance'
 
 export const getAllUsers = async () => {
@@ -89,6 +91,18 @@ export const makeAdmin = async (userId: string): Promise<any> => {
 export const deleteUser = async (userId: string): Promise<any> => {
   try {
     const res = await axiosInstance.delete(`/user/delete-user/${userId}`)
+
+    return res.data
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
+export const makePaymentForPremiumUser = async (
+  paymentData: FieldValues
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(`/payment/create-payment`, paymentData)
 
     return res.data
   } catch (error: any) {
